@@ -63,7 +63,9 @@
 										</h3>
 									</div>
 									<form method="POST" action="{{ url_for('login') }}" >
-									
+										{% if message %}
+											<span style="color:red">{{ message }}</span>
+										{% endif %}
 										{{ form.csrf_token}}
 
 										<div class="form-group">

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
@@ -53,8 +53,8 @@ class RegisterForm(FlaskForm):
     image = FileField(validators=[FileAllowed(IMAGES, 'Only Images Are Accepted')])
 
 class LoginForm(FlaskForm):
-    username = StringField('Username')
-    password = PasswordField('Password')
+    username = StringField('Username', validators=[InputRequired('Username is required')])
+    password = PasswordField('Password', validators=[InputRequired('A password is required')])
     remember = BooleanField('Remember me')
 
 
@@ -62,21 +62,20 @@ class LoginForm(FlaskForm):
 def index():
 
     form = LoginForm()
-
-    if form.validate_on_submit():
-        return '<h1>Username: {}, Password: {}, Remember: {}</h1>'.format(form.username.data, form.password.data, form.remember.data)
-
     return render_template('index.html', form=form)
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET','POST'])
 def login():
+    if request.method == 'GET':
+        return redirect(url_for('index'))
+
     form = LoginForm()
 
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
 
         if not user:
-            return 'Login Failed'
+            return render_template('index.html', form=form, message= 'Login Failed!')
 
         if check_password_hash(user.password, form.password.data):
             login_user(user)
@@ -85,7 +84,7 @@ def login():
 
         return 'Login failed'
     
-    return redirect(url_for('index'))
+    return render_template('index.html', form=form)
 
 @app.route('/profile')
 def profile():
