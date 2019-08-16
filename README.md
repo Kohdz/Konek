@@ -9,3 +9,4 @@ Bugs:
 
     app.route('register')
         - No warning if something other than an image is uploaded
+    
