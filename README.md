@@ -1,3 +1,7 @@
+TODO:
+    implement Recaptcha from flask-wtf
+
+
 Bugs:
 
     CSS:

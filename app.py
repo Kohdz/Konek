@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
@@ -7,7 +7,7 @@ from wtforms import StringField, PasswordField
 from wtforms.validators import InputRequired, Length
 from flask_wtf.file import FileField, FileAllowed
 from flask_uploads import UploadSet, configure_uploads, IMAGES
-
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 app = Flask(__name__)
@@ -64,7 +64,11 @@ def register():
         image_filename = photos.save(form.image.data)
         image_url = photos.url(image_filename)
 
-        return '<h1>Name: {}, Username: {}, Password: {}, Image URL: {}</h1>'.format(form.name.data, form.username.data, form.password.data, image_url)
+        new_user = User(name=form.name.data, username=form.username.data, image=image_url, password=generate_password_hash(form.password.data))
+        db.session.add(new_user)
+        db.session.commit()
+
+        return redirect(url_for('profile'))
     
     return render_template('register.html', form=form)
 
