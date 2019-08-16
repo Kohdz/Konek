@@ -25,9 +25,9 @@ class User(db.Model):
     image = db.Column(db.String(100))
     password = db.Column(db.String(50))
 
-class RegisterForm(FlaskForm)
+class RegisterForm(FlaskForm):
     name = StringField('Full name', validators=[InputRequired('A full name is required.'), Length(max=100, message='Name Must Not Exceed 100 Charactors')])
-    username = StringField('Username', validators=[InputRequired('Username is required'), length(max=30, message="Username Has Too Many Characters")])
+    username = StringField('Username', validators=[InputRequired('Username is required'), Length(max=30, message="Username Has Too Many Characters")])
     password = PasswordField('Password', validators=[InputRequired('A password is required')])
     image = FileField()
 
@@ -44,9 +44,14 @@ def profile():
 def timeline():
     return render_template('timeline.html')
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html')
+    form = RegisterForm()
+
+    if form.validate_on_submit():
+        return '<h1>Name: {}, Username: {}, Password: {}</h1>'.format(form.name.data, form.username.data, form.password.data)
+    return render_template('register.html', form=form)
+
 
 if __name__ == '__main__':
     manager.run()

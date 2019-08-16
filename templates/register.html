@@ -30,26 +30,31 @@
 
 					<br />
 
-					<div class="form-group">
-						<input type="text" name="full_name" id="full_name" class="form-control" placeholder="Enter your full name" />
+					<form action="{{ url_for('register') }}" method="POST">
+					{{ form.csrf_token }}
+
+					<div class="form-group"> 
+						{{ form.name(class="form-control", placeholder="Enter your full name") }}
+					</div>
+					
+					<div class="form-group"> 
+							{{ form.username(class="form-control", placeholder="Enter your Username") }}
+					</div>
+
+					<div class="form-group"> 
+							{{ form.password(class="form-control", placeholder="Enter your Password") }}
 					</div>
 
 					<div class="form-group">
-						<input type="text" name="username" id="username" class="form-control" placeholder="Enter a username" />
-					</div>
-
-					<div class="form-group">
-						<input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" />
-					</div>
-
-					<div class="form-group">
-    					<label for="exampleFormControlFile1">Profile image</label>
-    					<input type="file" class="form-control-file" name="profile_image" id="profile_image">
+						<label for="exampleFormControlFile1">Profile image</label>
+						{{ form.image(class="form-control-file") }}
   					</div>
 
 					<div class="form-group">
-						<button type="button" class="btn btn-danger btn-block">Sign up</button>
+						<button type="submit" class="btn btn-danger btn-block">Sign up</button>
 					</div>
+
+					</form>
 
 					<div class="form-group">
 						<a href="./"><i class="glyphicon glyphicon-arrow-left"></i> Back</a>
