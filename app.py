@@ -3,14 +3,22 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 from flask_wtf import FlaskForm
-from wtforms import StringField, FileField, PasswordField
-from wtforms.validators import InputRequired, Length 
+from wtforms import StringField, PasswordField
+from wtforms.validators import InputRequired, Length
+from flask_wtf.file import FileField, FileAllowed
+from flask_uploads import UploadSet, configure_uploads, IMAGES
+
 
 
 app = Flask(__name__)
+
+photos = UploadSet('photos', IMAGES)
+
+app.config['UPLOADED_PHOTOS_DEST'] = 'images'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Vicktree/Desktop/twitter-clone/twitterclone.db'
 app.config['SECRET_KEY'] = 'test'
 
+configure_uploads(app, photos)
 
 db = SQLAlchemy(app)
 Migrate = Migrate(app, db)
@@ -26,10 +34,14 @@ class User(db.Model):
     password = db.Column(db.String(50))
 
 class RegisterForm(FlaskForm):
-    name = StringField('Full name', validators=[InputRequired('A full name is required.'), Length(max=100, message='Name Must Not Exceed 100 Charactors')])
-    username = StringField('Username', validators=[InputRequired('Username is required'), Length(max=30, message="Username Has Too Many Characters")])
+    name = StringField('Full name', validators=[InputRequired('A full name is required.'),
+         Length(max=100, message='Name Must Not Exceed 100 Charactors')])
+    
+    username = StringField('Username', validators=[InputRequired('Username is required'), 
+        Length(max=30, message="Username Has Too Many Characters")])
+    
     password = PasswordField('Password', validators=[InputRequired('A password is required')])
-    image = FileField()
+    image = FileField(validators=[FileAllowed(IMAGES, 'Only Images Are Accepted')])
 
 
 @app.route('/')
@@ -49,7 +61,11 @@ def register():
     form = RegisterForm()
 
     if form.validate_on_submit():
-        return '<h1>Name: {}, Username: {}, Password: {}</h1>'.format(form.name.data, form.username.data, form.password.data)
+        image_filename = photos.save(form.image.data)
+        image_url = photos.url(image_filename)
+
+        return '<h1>Name: {}, Username: {}, Password: {}, Image URL: {}</h1>'.format(form.name.data, form.username.data, form.password.data, image_url)
+    
     return render_template('register.html', form=form)
 
 
