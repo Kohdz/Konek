@@ -1,263 +1,210 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>twitter-clone profile</title>
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-center bold">My Profile</h3>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row pad">
+                        <div class="col-lg-12">
+                            <img src="./imgs/amon.png" class="img-responsive img-circle center-block" alt="Image" style="height: 220px;" />
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <i class="glyphicon glyphicon-user"></i> NAME: 
+                        <strong class="pull-right">Ash Ketchum</strong>
+                    </li>
+                    <li class="list-group-item">
+                        <i class="glyphicon glyphicon-th"></i> Handle: 
+                        <strong class="pull-right"><em>@forever11</em></strong>
+                    </li>
+                    <li class="list-group-item">
+                        <i class="glyphicon glyphicon-calendar"></i> MEMBER SINCE: 
+                        <strong class="pull-right">September 1, 2019</strong>
+                    </li>
+                    <li class="list-group-item">
+                        <i class="glyphicon glyphicon-th-list"></i> FOLLOWERS COUNT: 
+                        <strong class="pull-right">300 Quadrillion</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="{{url_for('static', filename='./bs/css/united.min.css') }}">
-		<link rel="stylesheet" href="./css/styles.css">
-	</head>
-	<body>
-
-		<div class="container-fluid">
-			<div class="row" id="banner">
-				<div class="title col-lg-12">
-					<p class="title">
-						<a href="./">twitter-clone</a>
-					</p>
-					<p class="subtitle">...less toxic then the actual twitter</p>
-				</div>
-			</div>
-		</div>
-
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="./">twitter-clone</a>
-				</div>
-		
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse navbar-ex1-collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="./timeline.html">Timeline</a></li>
-						<li class="active"><a href="./profile.html">My Profile</a></li>
-						<li class=""><a href="">Logout</a></li>
-					</ul>
-				</div><!-- /.navbar-collapse -->
-			</div>
-		</nav>
-
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h3 class="text-center bold">My Profile</h3>
-				</div>
-				<div class="col-lg-4">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<div class="row pad">
-								<div class="col-lg-12">
-									<img src="./imgs/amon.png" class="img-responsive img-circle center-block" alt="Image" style="height: 220px;" />
-								</div>
-							</div>
-						</div>
-						<ul class="list-group">
-							<li class="list-group-item">
-								<i class="glyphicon glyphicon-user"></i> NAME: 
-								<strong class="pull-right">Ash Ketchum</strong>
-							</li>
-							<li class="list-group-item">
-								<i class="glyphicon glyphicon-th"></i> Handle: 
-								<strong class="pull-right"><em>@forever11</em></strong>
-							</li>
-							<li class="list-group-item">
-								<i class="glyphicon glyphicon-calendar"></i> MEMBER SINCE: 
-								<strong class="pull-right">September 1, 2019</strong>
-							</li>
-							<li class="list-group-item">
-								<i class="glyphicon glyphicon-th-list"></i> FOLLOWERS COUNT: 
-								<strong class="pull-right">300 Quadrillion</strong>
-							</li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="col-lg-5">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<h4><strong>Activity</strong></h4>
-							<div role="tabpanel">
-								<!-- Nav tabs -->
-								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation" class="active">
-										<a href="#tweets" aria-controls="tweets" role="tab" data-toggle="tab">Tweets</a>
-									</li>
-									<li role="presentation">
-										<a href="#followings" aria-controls="followings" role="tab" data-toggle="tab">Followers</a>
-									</li>
-								</ul>
-							
-								<!-- Tab panes -->
-								<div class="tab-content">
-									<div role="tabpanel" class="tab-pane active" id="tweets">
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="row pad">
-													<div class="col-lg-2">
-														<img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
-													</div>
-													<div class="col-lg-10">
-														<div>
-															<strong class="mid">Batman</strong> 
-															<small><em>@sadboi31</em></small> . 
-                                                            May 3
-														</div>
-														<div class="pad">
-															feeling sad! <a href="#">hanukkah</a> wooo.
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="row pad">
-													<div class="col-lg-2">
-														<img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
-													</div>
-													<div class="col-lg-10">
-														<div>
-															<strong class="mid">Batman</strong> 
-															<small><em>@sadboi31</em></small> . 
-															Aug 7
-														</div>
-														<div class="pad">
-															Where is robin. <a href="#">#BeatingForRobin</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="row pad">
-													<div class="col-lg-2">
-														<img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
-													</div>
-													<div class="col-lg-10">
-														<div>
-															<strong class="mid">Batman</strong> 
-															<small><em>@sadboi31</em></small> . 
-															Aug 12
-														</div>
-														<div class="pad">
-															<a href="#">#RainyMood</a> rains hitting my lower mouth
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div role="tabpanel" class="tab-pane" id="followings">
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="row pad">
-													<div class="col-lg-2">
-														<img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
-													</div>
-													<div class="col-lg-10">
-														<div>
-															<strong class="mid">Naruto</strong> 
-															<small><em>@RamenLife</em></small>
-														</div>
-														<div class="row pad">
-															<hr />
-															<div class="col-lg-12">
-																<i class="glyphicon glyphicon-th-list"></i> 2
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="row pad">
-													<div class="col-lg-2">
-														<img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
-													</div>
-													<div class="col-lg-10">
-														<div>
-															<strong class="mid">Dora</strong> 
-															<small><em>@notExploring</em></small>
-														</div>
-														<div class="row pad">
-															<hr />
-															<div class="col-lg-12">
-																<i class="glyphicon glyphicon-th-list"></i> 1,000
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="row pad">
-													<div class="col-lg-2">
-														<img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
-													</div>
-													<div class="col-lg-10">
-														<div>
-															<strong class="mid">Bloomberg</strong> 
-															<small><em>@3termMayor</em></small>
-														</div>
-														<div class="row pad">
-															<hr />
-															<div class="col-lg-12">
-																<i class="glyphicon glyphicon-th-list"></i> 159,453
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="row pad">
-													<div class="col-lg-2">
-														<img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
-													</div>
-													<div class="col-lg-10">
-														<div>
-															<strong class="mid">Tommy Pickles</strong> 
-															<small><em>@rugRat1</em></small>
-														</div>
-														<div class="row pad">
-															<hr />
-															<div class="col-lg-12">
-																<i class="glyphicon glyphicon-th-list"></i> 2,000,000
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-		</div>
-
-		<!-- jQuery -->
-			<script src="{{ url_for('static', filename='bs/js/jquery.min.js') }}"></script>
-		<!-- Bootstrap JavaScript -->
-			<script src="{{ url_for('static', filename='bs/js/bootstrap.min.js') }}"></script>
-	</body>
-</html>
+        <div class="col-lg-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4><strong>Activity</strong></h4>
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#tweets" aria-controls="tweets" role="tab" data-toggle="tab">Tweets</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#followings" aria-controls="followings" role="tab" data-toggle="tab">Followers</a>
+                            </li>
+                        </ul>
+                    
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="tweets">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row pad">
+                                            <div class="col-lg-2">
+                                                <img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
+                                            </div>
+                                            <div class="col-lg-10">
+                                                <div>
+                                                    <strong class="mid">Batman</strong> 
+                                                    <small><em>@sadboi31</em></small> . 
+                                                    May 3
+                                                </div>
+                                                <div class="pad">
+                                                    feeling sad! <a href="#">hanukkah</a> wooo.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row pad">
+                                            <div class="col-lg-2">
+                                                <img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
+                                            </div>
+                                            <div class="col-lg-10">
+                                                <div>
+                                                    <strong class="mid">Batman</strong> 
+                                                    <small><em>@sadboi31</em></small> . 
+                                                    Aug 7
+                                                </div>
+                                                <div class="pad">
+                                                    Where is robin. <a href="#">#BeatingForRobin</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row pad">
+                                            <div class="col-lg-2">
+                                                <img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
+                                            </div>
+                                            <div class="col-lg-10">
+                                                <div>
+                                                    <strong class="mid">Batman</strong> 
+                                                    <small><em>@sadboi31</em></small> . 
+                                                    Aug 12
+                                                </div>
+                                                <div class="pad">
+                                                    <a href="#">#RainyMood</a> rains hitting my lower mouth
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="followings">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row pad">
+                                            <div class="col-lg-2">
+                                                <img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
+                                            </div>
+                                            <div class="col-lg-10">
+                                                <div>
+                                                    <strong class="mid">Naruto</strong> 
+                                                    <small><em>@RamenLife</em></small>
+                                                </div>
+                                                <div class="row pad">
+                                                    <hr />
+                                                    <div class="col-lg-12">
+                                                        <i class="glyphicon glyphicon-th-list"></i> 2
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row pad">
+                                            <div class="col-lg-2">
+                                                <img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
+                                            </div>
+                                            <div class="col-lg-10">
+                                                <div>
+                                                    <strong class="mid">Dora</strong> 
+                                                    <small><em>@notExploring</em></small>
+                                                </div>
+                                                <div class="row pad">
+                                                    <hr />
+                                                    <div class="col-lg-12">
+                                                        <i class="glyphicon glyphicon-th-list"></i> 1,000
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row pad">
+                                            <div class="col-lg-2">
+                                                <img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
+                                            </div>
+                                            <div class="col-lg-10">
+                                                <div>
+                                                    <strong class="mid">Bloomberg</strong> 
+                                                    <small><em>@3termMayor</em></small>
+                                                </div>
+                                                <div class="row pad">
+                                                    <hr />
+                                                    <div class="col-lg-12">
+                                                        <i class="glyphicon glyphicon-th-list"></i> 159,453
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row pad">
+                                            <div class="col-lg-2">
+                                                <img src="./imgs/anonymous.png" class="img-circle" style="width: 60px; height: 60px;" />
+                                            </div>
+                                            <div class="col-lg-10">
+                                                <div>
+                                                    <strong class="mid">Tommy Pickles</strong> 
+                                                    <small><em>@rugRat1</em></small>
+                                                </div>
+                                                <div class="row pad">
+                                                    <hr />
+                                                    <div class="col-lg-12">
+                                                        <i class="glyphicon glyphicon-th-list"></i> 2,000,000
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock content %}
