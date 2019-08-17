@@ -11,7 +11,7 @@ app = Flask(__name__)
 photos = UploadSet('photos', IMAGES)
 
 app.config['UPLOADED_PHOTOS_DEST'] = 'images'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Vicktree/Desktop/twitter-clone/twitterclone.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///twitterclone.db'
 app.config['SECRET_KEY'] = 'test'
 
 login_manager = LoginManager(app)
