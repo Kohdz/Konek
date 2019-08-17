@@ -24,7 +24,7 @@ def index():
     if form.validate_on_submit():
         return '<h1>Username: {}, Password: {}, Remember: {}</h1>'.format(form.username.data, form.password.data, form.remember.data)
 
-    return render_template('index.html', form=form)
+    return render_template('index.html', form=form, title="Homepage")
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -47,14 +47,25 @@ def login():
     return redirect(url_for('index'))
 
 
+# logout route
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
+# needs a login required route (commented out until no more dummy data)
+# @login_required
 @app.route('/profile')
 def profile():
-    return render_template('profile.html')
+    return render_template('profile.html', title="Profile")
 
 
+# needs a login required route (commented until no more dummy data)
+# @login_required
 @app.route('/timeline')
 def timeline():
-    return render_template('timeline.html')
+    return render_template('timeline.html', title="Timeline")
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -71,4 +82,4 @@ def register():
 
         return redirect(url_for('profile'))
     
-    return render_template('register.html', form=form)
+    return render_template('register.html', form=form, title="Register")

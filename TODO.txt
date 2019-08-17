@@ -1,0 +1,16 @@
+################
+######TODO######
+################
+
+- Fix Log In button (from sign up page)
+- Create Tweet Database and create a relation with User
+
+
+#################
+####COMPLETED####
+#################
+
+- template inheritance [x]
+- fixed up directory tree [x]
+- log out button fully functional [x]
+- navbar showing different options depending on if user is logged in or logged out [x]
