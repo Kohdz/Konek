@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
@@ -25,6 +25,27 @@ def index():
         return '<h1>Username: {}, Password: {}, Remember: {}</h1>'.format(form.username.data, form.password.data, form.remember.data)
 
     return render_template('index.html', form=form, title="Homepage")
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+
+    if form.validate_on_submit():
+        image_filename = photos.save(form.image.data)
+        image_url = photos.url(image_filename)
+
+        new_user = User(name=form.name.data, username=form.username.data, email=form.email.data, image=image_url, password=generate_password_hash(form.password.data))
+
+        db.session.add(new_user)
+        db.session.commit()
+        
+        # flash message that user has been created
+        flash('User has been succesfully created! Please log in!')
+        
+        return redirect(url_for('login'))
+    
+    return render_template('register.html', form=form, title="Register")
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -66,20 +87,3 @@ def profile():
 @app.route('/timeline')
 def timeline():
     return render_template('timeline.html', title="Timeline")
-
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegisterForm()
-
-    if form.validate_on_submit():
-        image_filename = photos.save(form.image.data)
-        image_url = photos.url(image_filename)
-
-        new_user = User(name=form.name.data, username=form.username.data, image=image_url, password=generate_password_hash(form.password.data))
-        db.session.add(new_user)
-        db.session.commit()
-
-        return redirect(url_for('profile'))
-    
-    return render_template('register.html', form=form, title="Register")
