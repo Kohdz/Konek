@@ -6,13 +6,18 @@ from flask_uploads import UploadSet, configure_uploads
 from flask_login import LoginManager
 from flask_uploads import IMAGES
 
+
 app = Flask(__name__)
 
 photos = UploadSet('photos', IMAGES)
 
 app.config['UPLOADED_PHOTOS_DEST'] = 'images'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///twitterclone.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Vicktree/Desktop/twitter-clone2/twitterclone.db'
 app.config['SECRET_KEY'] = 'test'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['DEBUG'] = True
+
+
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
@@ -20,9 +25,13 @@ login_manager.login_view = 'login'
 configure_uploads(app, photos)
 
 db = SQLAlchemy(app)
+
+
+
 Migrate = Migrate(app, db)
 
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
-# from twitter_clone import routes
+
+from twitter_clone import routes

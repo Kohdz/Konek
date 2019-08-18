@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
@@ -27,6 +27,27 @@ def index():
     return render_template('index.html', form=form, title="Homepage")
 
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+
+    if form.validate_on_submit():
+        image_filename = photos.save(form.image.data)
+        image_url = photos.url(image_filename)
+
+        new_user = User(name=form.name.data, username=form.username.data, email=form.email.data, image=image_url, password=generate_password_hash(form.password.data))
+
+        db.session.add(new_user)
+        db.session.commit()
+        
+        # flash message that user has been created
+        flash('User has been succesfully created! Please log in!')
+        
+        return redirect(url_for('login'))
+    
+    return render_template('register.html', form=form, title="Register")
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -49,7 +70,6 @@ def login():
 
 # logout route
 @app.route('/logout')
-@login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
@@ -58,10 +78,8 @@ def logout():
 # needs a login required route (commented out until no more dummy data)
 # @login_required
 @app.route('/profile')
-@login_required
 def profile():
-    current_user
-    return render_template('profile.html', title="Profile", current_user=current_user)
+    return render_template('profile.html', title="Profile")
 
 
 # needs a login required route (commented until no more dummy data)
@@ -69,20 +87,3 @@ def profile():
 @app.route('/timeline')
 def timeline():
     return render_template('timeline.html', title="Timeline")
-
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegisterForm()
-
-    if form.validate_on_submit():
-        image_filename = photos.save(form.image.data)
-        image_url = photos.url(image_filename)
-
-        new_user = User(name=form.name.data, username=form.username.data, image=image_url, password=generate_password_hash(form.password.data))
-        db.session.add(new_user)
-        db.session.commit()
-
-        return redirect(url_for('profile'))
-    
-    return render_template('register.html', form=form, title="Register")
