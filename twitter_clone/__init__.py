@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///twitterclone.db'
 app.config['SECRET_KEY'] = 'test'
 
 login_manager = LoginManager(app)
-
+login_manager.login_view = 'login'
 
 configure_uploads(app, photos)
 
@@ -25,4 +25,4 @@ Migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
-from twitter_clone import routes
+# from twitter_clone import routes

@@ -49,6 +49,7 @@ def login():
 
 # logout route
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
@@ -57,8 +58,10 @@ def logout():
 # needs a login required route (commented out until no more dummy data)
 # @login_required
 @app.route('/profile')
+@login_required
 def profile():
-    return render_template('profile.html', title="Profile")
+    current_user
+    return render_template('profile.html', title="Profile", current_user=current_user)
 
 
 # needs a login required route (commented until no more dummy data)
