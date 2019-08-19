@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
@@ -77,26 +77,50 @@ def logout():
 
 # needs a login required route (commented out until no more dummy data)
 # @login_required
-@app.route('/profile')
-@login_required
-def profile():
-    return render_template('profile.html', title="Profile", current_user=current_user)
+
+
+@app.route('/profile', defaults={'username': None})
+@app.route('/profile/<username>')
+def profile(username):
+
+    if username:
+        user = User.query.filter_by(username=username).first()
+        
+        if not user:
+            abort(404)
+    else:
+        user = current_user
+
+    tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).all()
+
+    current_time = datetime.now()
+
+    return render_template('profile.html', title="Profile", current_user=user, tweets=tweets, current_time=current_time)
 
 
 # needs a login required route (commented until no more dummy data)
 # @login_required
-@app.route('/timeline')
-def timeline():
+@app.route('/timeline', defaults={'username': None})
+@app.route('/timeline/<username>')
+def timeline(username):
     form = TweetForm()
 
-    user_id = current_user.id
-    tweets = Tweet.query.filter_by(user_id=user_id).order_by(Tweet.date_created.desc()).all()
+    if username:
+        user = User.query.filter_by(username=username).first()
+        if not user:
+            abort(404)
+    
+    else:
+        user = current_user
+
+    
+    tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).all()
 
     total_tweets = len(tweets)
 
     current_time = datetime.now()
 
-    return render_template('timeline.html', title="Timeline", form=form, tweets=tweets, current_time=current_time, current_user=current_user, total_tweets=total_tweets)
+    return render_template('timeline.html', title="Timeline", form=form, tweets=tweets, current_time=current_time, current_user=user, total_tweets=total_tweets)
 
 @app.route('/post_tweet', methods=['POST'])
 @login_required
@@ -126,7 +150,7 @@ def time_passed(seconds_since):
     if days > 0:
         return '%dd' % (days)
     elif hours > 0:
-        return '$dh' % (hours)
+        return '%dh' % (hours)
     elif minutes > 0:
         return '%dm' % (minutes)
     else:
