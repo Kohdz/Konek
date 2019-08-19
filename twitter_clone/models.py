@@ -3,6 +3,14 @@ from flask_login import LoginManager, UserMixin
 from . import db
 
 
+# wont be acessing this class directly, no no class needed
+# has relationship back to user
+followers = db.Table('Followers',
+    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('following_id', db.Integer, db.ForeignKey('user.id'))
+    )
+
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
@@ -12,7 +20,16 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(50))
     join_date = db.Column(db.DateTime)
     test = db.Column(db.String(50))
+    
     tweets = db.relationship('Tweet', backref='user', lazy='dynamic')
+    
+    following = db.relationship('User', secondary=followers, 
+        primaryjoin=(followers.c.follower_id == id),
+        secondaryjoin=(followers.c.following_id == id),
+        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic'
+
+        )
+
 
 class Tweet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,6 +38,6 @@ class Tweet(db.Model):
     date_created = db.Column(db.DateTime)
 
 
-    # format of return string of "User.query.__() terminal command"
-    def __repr__(self):
-        return f'username: {self.username} | name: {self.name} | email: {self.email}'
+# format of return string of "User.query.__() terminal command"
+def __repr__(self):
+    return f'username: {self.username} | name: {self.name} | email: {self.email}'
