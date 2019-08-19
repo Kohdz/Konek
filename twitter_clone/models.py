@@ -30,6 +30,12 @@ class User(UserMixin, db.Model):
 
         )
 
+    followed_by = db.relationship('User', secondary=followers,
+        primaryjoin=(followers.c.following_id == id),
+        secondaryjoin=(followers.c.follower_id == id),
+        backref=db.backref('follower', lazy='dynamic'), lazy='dynamic')
+
+
 
 class Tweet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
