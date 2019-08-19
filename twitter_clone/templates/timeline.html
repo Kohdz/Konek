@@ -226,12 +226,15 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Post New Message</h4>
                 </div>
-                <div class="modal-body">
+                <form action="{{ url_for('post_tweet')}}" method="POST">
+                    <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2">
                             <div class="form-group">
-                                <label>Enter new <a href="./">Eng@ge!</a> post</label>
-                                <textarea name="message" id="message" class="form-control" rows="6" required="required" placeholder="Enter your new message here."></textarea>
+                                {{ form.csrf_token }}
+                                <label>Enter new post</label>
+                                {{ form.text(class='form-control', rows=6, required=required,
+                                placeholder='Enter Your Message Here')}}
                             </div>
                             <div class="form-group">
                                 By posting on our platform, you agree to our <a href="#">Terms and Conditions</a>.
@@ -243,9 +246,10 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">
                         <i class="glyphicon glyphicon-ban-circle"></i> Close
                     </button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    <button type="submit" class="btn btn-primary">
                         <i class="glyphicon glyphicon-send"></i> Post
                     </button>
+                </form>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import InputRequired, Length, ValidationError, Email, EqualTo
-from wtforms import StringField, PasswordField, BooleanField
+from wtforms import StringField, PasswordField, BooleanField, TextAreaField
 from flask_uploads import IMAGES
 from twitter_clone.models import User
 
@@ -32,3 +32,7 @@ class LoginForm(FlaskForm):
     username = StringField('Username')
     password = PasswordField('Password')
     remember = BooleanField('Remember me')
+
+
+class TweetForm(FlaskForm):
+    text = TextAreaField('Message', validators=[InputRequired('Message is Required')])

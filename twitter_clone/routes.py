@@ -6,9 +6,8 @@ from flask_uploads import UploadSet, configure_uploads
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, current_user, logout_user
 from datetime import datetime
-
-from twitter_clone.models import User
-from twitter_clone.forms import RegisterForm, LoginForm
+from twitter_clone.models import User, Tweet
+from twitter_clone.forms import RegisterForm, LoginForm, TweetForm
 from twitter_clone import app, login_manager, photos, db
 
 
@@ -88,4 +87,30 @@ def profile():
 # @login_required
 @app.route('/timeline')
 def timeline():
-    return render_template('timeline.html', title="Timeline")
+    form = TweetForm()
+
+    return render_template('timeline.html', title="Timeline", form=form)
+
+@app.route('/post_tweet', methods=['POST'])
+@login_required
+def post_tweet():
+    form = TweetForm()
+
+    if form.validate():
+
+        tweet = Tweet(user_id=current_user.id, text=form.text.data, date_created=datetime.now())
+        db.session.add(tweet)
+        db.session.commit()
+
+
+        return redirect(url_for('timeline'))
+
+    return 'Something Went Wrong/Form Not Valid'
+
+
+
+
+
+
+
+        
