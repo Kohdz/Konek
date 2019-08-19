@@ -92,8 +92,11 @@ def timeline():
     user_id = current_user.id
     tweets = Tweet.query.filter_by(user_id=user_id).order_by(Tweet.date_created.desc()).all()
 
+    total_tweets = len(tweets)
 
-    return render_template('timeline.html', title="Timeline", form=form, tweets=tweets)
+    current_time = datetime.now()
+
+    return render_template('timeline.html', title="Timeline", form=form, tweets=tweets, current_time=current_time, current_user=current_user, total_tweets=total_tweets)
 
 @app.route('/post_tweet', methods=['POST'])
 @login_required
@@ -111,6 +114,23 @@ def post_tweet():
 
     return 'Something Went Wrong/Form Not Valid'
 
+@app.template_filter('time_passed')
+def time_passed(seconds_since):
+
+    seconds = seconds_since.total_seconds()
+    days, seconds = divmod(seconds, 86400)
+    hours, seconds = divmod(seconds, 3600)
+    minutes, seconds = divmod(seconds, 60)
+
+
+    if days > 0:
+        return '%dd' % (days)
+    elif hours > 0:
+        return '$dh' % (hours)
+    elif minutes > 0:
+        return '%dm' % (minutes)
+    else:
+        return 'now'
 
 
 

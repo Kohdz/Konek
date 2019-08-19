@@ -11,14 +11,15 @@
                 <div class="panel-body">
                     <div class="row pad">
                         <div class="col-lg-12">
-                            <img src="{{ url_for('static', filename='./imgs/amon.png') }}" class="img-responsive img-circle center-block" alt="Image" />
+                            <!-- <img src="{{ url_for('static', filename='./imgs/amon.png') }}" class="img-responsive img-circle center-block" alt="Image" /> -->
+                            <img src="{{ current_user.image }}" class="img-responsive img-circle center-block" alt="Image" />
                         </div>
                     </div>
                     <div class="row pad">
                         <div class="col-lg-4 col-lg-offset-2 text-center">
                             <strong>
                                 Tweets <br />
-                                50 
+                                {{ total_tweets}}
                             </strong> 
                         </div>
                         <div class="col-lg-4 text-center">
@@ -54,7 +55,7 @@
                                                 <small><em>@ {{ tweet.user.username }}</em></small>
                                             </div>
                                             <div class="col-lg-2 text-right">
-                                                15m
+                                                {{ (current_time - tweet.date_created) |time_passed }}
                                             </div>
                                         </div>
                                         <div class="row pad">
