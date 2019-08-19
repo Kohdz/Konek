@@ -11,7 +11,7 @@
                 <div class="panel-body">
                     <div class="row pad">
                         <div class="col-lg-12">
-                            <img src="./imgs/anonymous.png" class="img-responsive img-circle center-block" alt="Image" />
+                            <img src="{{ url_for('static', filename='./imgs/amon.png') }}" class="img-responsive img-circle center-block" alt="Image" />
                         </div>
                     </div>
                     <div class="row pad">
@@ -40,54 +40,34 @@
         <div class="col-lg-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <div class="row">
-                                        <div class="col-lg-10">
-                                            <!-- <i class="glyphicon glyphicon-user"></i>  -->
-                                            <img src="./imgs/anonymous.png" style="width: 30px; height: 30px;" class="img-circle">
-                                            <strong>Re-l</strong> 
-                                            <small><em>@realproxy</em></small>
+                    {% for tweet in tweets %}
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <div class="row">
+                                            <div class="col-lg-10">
+                                                <!-- <i class="glyphicon glyphicon-user"></i>  -->
+                                                <img src="{{ url_for('static', filename='./imgs/amon.png') }}" style="width: 30px; height: 30px;" class="img-circle">
+                                                <!-- <img src="{{ tweet.user.image }}" style=" width: 30px; height: 30px;"" class="img-circle"> -->
+                                                <strong> {{ tweet.user.name }}</strong> 
+                                                <small><em>@ {{ tweet.user.username }}</em></small>
+                                            </div>
+                                            <div class="col-lg-2 text-right">
+                                                15m
+                                            </div>
                                         </div>
-                                        <div class="col-lg-2 text-right">
-                                            15m
-                                        </div>
-                                    </div>
-                                    <div class="row pad">
-                                        <div class="col-lg-12">
-                                            What is your reason dentre. <a href="#">#whoAmI</a> <a href="#">#Illusion</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <div class="row">
-                                        <div class="col-lg-10">
-                                            <!-- <i class="glyphicon glyphicon-user"></i>  -->
-                                            <img src="./imgs/anonymous.png" style="width: 30px; height: 30px;" class="img-circle">
-                                            <strong>Re-l</strong> 
-                                            <small><em>@realproxy</em></small>
-                                        </div>
-                                        <div class="col-lg-2 text-right">
-                                            1h
-                                        </div>
-                                    </div>
-                                    <div class="row pad">
-                                        <div class="col-lg-12">
-                                            The self is an illusion <a href="#">#freewill</a> <a href="#">#wakingup</a>
+                                        <div class="row pad">
+                                            <div class="col-lg-12">
+                                                {{ tweet.text }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    
+                    {% endfor %}
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="thumbnail">
@@ -95,55 +75,7 @@
                                     <div class="row">
                                         <div class="col-lg-10">
                                             <!-- <i class="glyphicon glyphicon-user"></i>  -->
-                                            <img src="./imgs/anonymous.png" style="width: 30px; height: 30px;" class="img-circle">
-                                            <strong>Re-l</strong> 
-                                            <small><em>@realproxy</em></small>
-                                        </div>
-                                        <div class="col-lg-2 text-right">
-                                            3h
-                                        </div>
-                                    </div>
-                                    <div class="row pad">
-                                        <div class="col-lg-12">
-                                            What is your purpose. <a href="#">#nihilism</a> <a href="#">#extanilism</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <div class="row">
-                                        <div class="col-lg-10">
-                                            <!-- <i class="glyphicon glyphicon-user"></i>  -->
-                                            <img src="./imgs/anonymous.png" style="width: 30px; height: 30px;" class="img-circle">
-                                            <strong>Re-l</strong> 
-                                            <small><em>@realproxy</em></small>
-                                        </div>
-                                        <div class="col-lg-2 text-right">
-                                            4h
-                                        </div>
-                                    </div>
-                                    <div class="row pad">
-                                        <div class="col-lg-12">
-                                            A strange day. <a href="#">#mysterious</a> <a href="#">#theAbsurd</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <div class="row">
-                                        <div class="col-lg-10">
-                                            <!-- <i class="glyphicon glyphicon-user"></i>  -->
-                                            <img src="./imgs/anonymous.png" style="width: 30px; height: 30px;" class="img-circle">
+                                            <img src="{{ url_for('static', filename='./imgs/amon.png') }}" style="width: 30px; height: 30px;" class="img-circle">
                                             <strong>Vincent Law</strong> 
                                             <small><em>@proxyOne</em></small>
                                         </div>

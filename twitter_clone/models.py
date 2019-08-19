@@ -12,6 +12,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(50))
     join_date = db.Column(db.DateTime)
     test = db.Column(db.String(50))
+    tweets = db.relationship('Tweet', backref='user', lazy='dynamic')
 
 class Tweet(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -89,7 +89,11 @@ def profile():
 def timeline():
     form = TweetForm()
 
-    return render_template('timeline.html', title="Timeline", form=form)
+    user_id = current_user.id
+    tweets = Tweet.query.filter_by(user_id=user_id).order_by(Tweet.date_created.desc()).all()
+
+
+    return render_template('timeline.html', title="Timeline", form=form, tweets=tweets)
 
 @app.route('/post_tweet', methods=['POST'])
 @login_required
