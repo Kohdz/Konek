@@ -5,6 +5,7 @@ from flask_script import Manager
 from flask_uploads import UploadSet, configure_uploads
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, current_user, logout_user
+from datetime import datetime
 
 from twitter_clone.models import User
 from twitter_clone.forms import RegisterForm, LoginForm
@@ -35,7 +36,7 @@ def register():
         image_filename = photos.save(form.image.data)
         image_url = photos.url(image_filename)
 
-        new_user = User(name=form.name.data, username=form.username.data, email=form.email.data, image=image_url, password=generate_password_hash(form.password.data))
+        new_user = User(name=form.name.data, username=form.username.data, email=form.email.data, image=image_url, password=generate_password_hash(form.password.data), join_date=datetime.now())
 
         db.session.add(new_user)
         db.session.commit()
@@ -78,8 +79,9 @@ def logout():
 # needs a login required route (commented out until no more dummy data)
 # @login_required
 @app.route('/profile')
+@login_required
 def profile():
-    return render_template('profile.html', title="Profile")
+    return render_template('profile.html', title="Profile", current_user=current_user)
 
 
 # needs a login required route (commented until no more dummy data)

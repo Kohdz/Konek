@@ -11,8 +11,13 @@ class User(UserMixin, db.Model):
     image = db.Column(db.String(100))
     password = db.Column(db.String(50))
     join_date = db.Column(db.DateTime)
+    test = db.Column(db.String(50))
 
-
+class Tweet(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    text = db.Column(db.String(140))
+    date_created = db.Column(db.DateTime)
 
 
     # format of return string of "User.query.__() terminal command"

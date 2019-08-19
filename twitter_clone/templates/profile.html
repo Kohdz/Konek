@@ -11,6 +11,7 @@
                     <div class="row pad">
                         <div class="col-lg-12">
                             <img src="{{ url_for('static', filename='./imgs/amon.png') }}" class="img-responsive img-circle center-block" alt="Image" style="height: 220px;" />
+                            <!-- <img src="{{ current_user.image }}" class="img-responsive img-circle center-block" alt="Image" style="height: 220px;" /> -->
                         </div>
                     </div>
                 </div>
@@ -25,7 +26,7 @@
                     </li> if U
                     <li class="list-group-item">
                         <i class="glyphicon glyphicon-calendar"></i> MEMBER SINCE: 
-                        <strong class="pull-right">September 1, 2019</strong>
+                        <strong class="pull-right">{{ current_user.join_date.strftime('%B %d, %Y')}}</strong>
                     </li>
                     <li class="list-group-item">
                         <i class="glyphicon glyphicon-th-list"></i> FOLLOWERS COUNT: 
