@@ -2,8 +2,17 @@
 ######TODO######
 ################
 
-- Fix Log In button (from sign up page)
-- Create Tweet Database and create a relation with User
+- Fix profile picture to load on the web app
+- Remove Profile Picture submission on registration page
+
+
+################
+#CHANGES I MADE#
+################
+
+- template inheritance for index page [x]
+- Change Login modal to render from Login template [x]
+- Implemented to display flash messages in layout.html [x]
 
 
 #################
@@ -14,3 +23,4 @@
 - fixed up directory tree [x]
 - log out button fully functional [x]
 - navbar showing different options depending on if user is logged in or logged out [x]
+- Create Tweet Database and create a relation with User [x]

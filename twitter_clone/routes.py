@@ -18,13 +18,7 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-
-    form = LoginForm()
-
-    if form.validate_on_submit():
-        return '<h1>Username: {}, Password: {}, Remember: {}</h1>'.format(form.username.data, form.password.data, form.remember.data)
-
-    return render_template('index.html', form=form, title="Homepage")
+    return render_template('index.html', title='Homepage')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -53,19 +47,23 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
+
         user = User.query.filter_by(username=form.username.data).first()
 
-        if not user:
-            return 'Login Failed'
-
-        if check_password_hash(user.password, form.password.data):
+        # if username in database -> check password
+        # if correct log the user in & flash success message
+        if user:
+            check_password_hash(user.password, form.password.data)
             login_user(user)
-
+            flash('You have been successfully logged in', 'success')
             return redirect(url_for('profile'))
 
-        return 'Login failed'
-    
-    return redirect(url_for('index'))
+        # if user does not exist - make the user retry their credentials
+        if not user:
+            flash('Login Failed. Please check your credentials and try again.', 'danger')
+            return redirect(url_for('login'))
+
+    return render_template('login.html', form=form, title='Log In')
 
 
 # logout route
@@ -75,21 +73,14 @@ def logout():
     return redirect(url_for('index'))
 
 
-# needs a login required route (commented out until no more dummy data)
-# @login_required
-
-
 @app.route('/profile', defaults={'username': None})
 @app.route('/profile/<username>')
 def profile(username):
 
     if username:
         user = User.query.filter_by(username=username).first()
-        
         if not user:
             abort(404)
-
-
     else:
         user = current_user
 
@@ -127,6 +118,7 @@ def timeline(username):
 
     return render_template('timeline.html', title="Timeline", form=form, tweets=tweets, current_time=current_time, current_user=user, total_tweets=total_tweets)
 
+
 @app.route('/post_tweet', methods=['POST'])
 @login_required
 def post_tweet():
@@ -141,7 +133,8 @@ def post_tweet():
 
         return redirect(url_for('timeline'))
 
-    return 'Something Went Wrong/Form Not Valid'
+    flash('Something Went Wrong/Form Not Valid', 'danger')
+
 
 @app.template_filter('time_passed')
 def time_passed(seconds_since):
@@ -160,6 +153,7 @@ def time_passed(seconds_since):
         return '%dm' % (minutes)
     else:
         return 'now'
+
 
 @app.route('/follow/<username>')
 @login_required
