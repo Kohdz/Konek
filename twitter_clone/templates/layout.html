@@ -39,6 +39,7 @@
                         {% if current_user.is_authenticated %}
                             <li class="active"><a href="{{ url_for('timeline') }}">Timeline</a></li>
                             <li class=""><a href="{{ url_for('profile') }}">My Profile</a></li>
+                            <li class=""><a href="{{ url_for('update_account') }}">Update Account</a></li>
                             <li class=""><a href="{{ url_for('logout') }}">Logout</a></li>
                         {% else %}
                             <li class=""><a href="{{ url_for('register') }}">Sign Up</a></li>

@@ -2,9 +2,6 @@
 ######TODO######
 ################
 
-- Fix profile picture to load on the web app
-- Remove Profile Picture submission on registration page
-
 
 ################
 #CHANGES I MADE#
@@ -13,6 +10,8 @@
 - template inheritance for index page [x]
 - Change Login modal to render from Login template [x]
 - Implemented to display flash messages in layout.html [x]
+- Remove Profile Picture submission on registration page [x]
+- Implement settings page - allows you to change profile picture, username, and email [x]
 
 
 #################
