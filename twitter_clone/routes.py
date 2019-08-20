@@ -7,8 +7,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, current_user, logout_user
 from datetime import datetime
 from twitter_clone.models import User, Tweet
-from twitter_clone.forms import RegisterForm, LoginForm, TweetForm
+from twitter_clone.forms import RegisterForm, LoginForm, TweetForm,UpdateAccountForm
 from twitter_clone import app, login_manager, photos, db
+import secrets, os
+from PIL import Image
 
 
 @login_manager.user_loader
@@ -18,13 +20,7 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-
-    form = LoginForm()
-
-    if form.validate_on_submit():
-        return '<h1>Username: {}, Password: {}, Remember: {}</h1>'.format(form.username.data, form.password.data, form.remember.data)
-
-    return render_template('index.html', form=form, title="Homepage")
+    return render_template('index.html', title='Homepage')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -32,16 +28,14 @@ def register():
     form = RegisterForm()
 
     if form.validate_on_submit():
-        image_filename = photos.save(form.image.data)
-        image_url = photos.url(image_filename)
 
-        new_user = User(name=form.name.data, username=form.username.data, email=form.email.data, image=image_url, password=generate_password_hash(form.password.data), join_date=datetime.now())
+        new_user = User(name=form.name.data, username=form.username.data, email=form.email.data, password=generate_password_hash(form.password.data), join_date=datetime.now())
 
         db.session.add(new_user)
         db.session.commit()
         
         # flash message that user has been created
-        flash('User has been succesfully created! Please log in!')
+        flash('User has been succesfully created! Please log in!', 'success')
         
         return redirect(url_for('login'))
     
@@ -53,19 +47,22 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
+
         user = User.query.filter_by(username=form.username.data).first()
 
-        if not user:
-            return 'Login Failed'
-
-        if check_password_hash(user.password, form.password.data):
+        # if username in database & pw correct
+        # log the user in & flash success message
+        if user and check_password_hash(user.password, form.password.data):
             login_user(user)
-
+            flash('You have been successfully logged in', 'success')
             return redirect(url_for('profile'))
 
-        return 'Login failed'
-    
-    return redirect(url_for('index'))
+        # if user does not exist - make the user retry their credentials
+        if not user:
+            flash('Login Failed. Please check your credentials and try again.', 'danger')
+            return redirect(url_for('login'))
+
+    return render_template('login.html', form=form, title='Log In')
 
 
 # logout route
@@ -75,31 +72,75 @@ def logout():
     return redirect(url_for('index'))
 
 
-# needs a login required route (commented out until no more dummy data)
-# @login_required
+# save picture function
+# NOTE: we will modify the filename of the uploaded image so there won't be confusion in our database if different filenames of the same image is uploaded
+def save_picture(image):
+    random_hex = secrets.token_hex(8)
+    # split image filename
+    _, f_ext = os.path.splitext(image.filename)
+    # create modified name for picture file
+    picture_name = random_hex + f_ext
+    # create absolute path for new picture image
+    picture_path = os.path.join(app.root_path, 'static/imgs', picture_name)
+    # save the image to the picture_path we created
+    image.save(picture_path)
+
+    # resize image upload with PIL
+    output_size = (125, 125)
+    i = Image.open(image)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+
+    return picture_name
+
+
+# update user account info route
+@app.route('/account', methods=['GET', 'POST'])
+@login_required
+def update_account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        if form.image.data:
+            picture_file = save_picture(form.image.data)
+            # set current user's image
+            current_user.image = picture_file
+
+        # update our current username and email
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        # make changes to our database
+        db.session.commit()
+        flash('Your account has been updated!', 'success')
+        return redirect(url_for('update_account'))
+    
+    # prepopulate the form fields with current user's info
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+
+    image_file = url_for('static', filename='imgs/' + current_user.image)
+
+    return render_template('update_account.html', title='Update Account', form=form, image_file=image_file)
 
 
 @app.route('/profile', defaults={'username': None})
 @app.route('/profile/<username>')
 def profile(username):
 
+    image_file = url_for('static', filename='imgs/' + current_user.image)
+
     if username:
         user = User.query.filter_by(username=username).first()
-        
         if not user:
             abort(404)
-
-
     else:
         user = current_user
 
     tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).all()
-
     current_time = datetime.now()
-
     followed_by = user.followed_by.all()
 
-    return render_template('profile.html', title="Profile", current_user=user, tweets=tweets, current_time=current_time, followed_by=followed_by)
+    return render_template('profile.html', title='Profile', current_user=user, tweets=tweets, current_time=current_time, followed_by=followed_by, image_file=image_file)
 
 
 # needs a login required route (commented until no more dummy data)
@@ -127,6 +168,7 @@ def timeline(username):
 
     return render_template('timeline.html', title="Timeline", form=form, tweets=tweets, current_time=current_time, current_user=user, total_tweets=total_tweets)
 
+
 @app.route('/post_tweet', methods=['POST'])
 @login_required
 def post_tweet():
@@ -141,7 +183,8 @@ def post_tweet():
 
         return redirect(url_for('timeline'))
 
-    return 'Something Went Wrong/Form Not Valid'
+    flash('Something Went Wrong/Form Not Valid', 'danger')
+
 
 @app.template_filter('time_passed')
 def time_passed(seconds_since):
@@ -160,6 +203,7 @@ def time_passed(seconds_since):
         return '%dm' % (minutes)
     else:
         return 'now'
+
 
 @app.route('/follow/<username>')
 @login_required

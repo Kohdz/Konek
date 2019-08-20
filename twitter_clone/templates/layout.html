@@ -39,19 +39,34 @@
                         {% if current_user.is_authenticated %}
                             <li class="active"><a href="{{ url_for('timeline') }}">Timeline</a></li>
                             <li class=""><a href="{{ url_for('profile') }}">My Profile</a></li>
+                            <li class=""><a href="{{ url_for('update_account') }}">Update Account</a></li>
                             <li class=""><a href="{{ url_for('logout') }}">Logout</a></li>
                         {% else %}
                             <li class=""><a href="{{ url_for('register') }}">Sign Up</a></li>
-                            <li class=""><a href="#login" data-toggle="modal" data-keyboard="false">Login</a></li>
+                            <li class=""><a href="{{ url_for('login') }}">Log In</a></li>
                         {% endif %}
 					</ul>
-				</div><!-- /.navbar-collapse -->
+                </div>
 			</div>
         </nav>
     </head>
 
 	<body>
-        {% block content %}{% endblock %}        
+    <div class="container">
+        <div class="row">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class='alert-{{ category }}'>
+                        {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            </div>
+        </div>
+    </div>
+        {% block content %}{% endblock %}      
     </body>
 
     <!-- jQuery -->
