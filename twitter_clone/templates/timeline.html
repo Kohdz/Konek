@@ -103,42 +103,16 @@
                     <h3>Who To Watch</h3>
                 </div>
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        Anime 
-                        <div>
-                            <strong>@AnimeCentral</strong> 
-                            <span class="pull-right">
-                                1,111,333 Followers
-                            </span>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        WeatherChannel
-                        <div>
-                            <strong>@TheWeather</strong> 
-                            <span class="pull-right">
-                                13,775 Followers
-                            </span>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        Leonardo Rumlow
-                        <div>
-                            <strong>@rummYLEO</strong> 
-                            <span class="pull-right">
-                                350 Followers
-                            </span>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        The Cable People
-                        <div>
-                            <strong>@theCablePeeps</strong> 
-                            <span class="pull-right">
-                                19,004 Followers
-                            </span>
-                        </div>
-                    </li>
+                     {% for user in who_to_watch %}
+                        <li class="list-group-item">
+                            {{ user.name }} 
+                            <div>
+                                <strong><a href="{{ url_for('profile', username=user.username) }}"> @ {{ user.username }}</a></strong> 
+                                <span class="pull-right">
+                                    {{ user.followed_by.all() |length }} Followers
+                                </span>
+                            </div>
+                        {% endfor %}    
                 </ul>
             </div>
         </div>

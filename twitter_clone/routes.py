@@ -176,11 +176,13 @@ def timeline(username):
         tweets = Tweet.query.join(followers, (followers.c.following_id == Tweet.user_id)).filter(followers.c.follower_id == current_user.id).order_by(Tweet.date_created.desc()).all()
         total_tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).count()
     
-    
 
     current_time = datetime.now()
 
-    return render_template('timeline.html', title="Timeline", form=form, tweets=tweets, current_time=current_time, current_user=user, total_tweets=total_tweets)
+    who_to_watch = User.query.filter(User.id != user.id).order_by(db.func.random()).limit(4).all()
+
+    return render_template('timeline.html', title="Timeline", form=form, tweets=tweets,
+         current_time=current_time, current_user=user, total_tweets=total_tweets, who_to_watch=who_to_watch)
 
 
 @app.route('/post_tweet', methods=['POST'])
