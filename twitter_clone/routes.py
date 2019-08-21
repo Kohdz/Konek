@@ -178,9 +178,6 @@ def timeline(username):
     
     
 
-
-    
-
     current_time = datetime.now()
 
     return render_template('timeline.html', title="Timeline", form=form, tweets=tweets, current_time=current_time, current_user=user, total_tweets=total_tweets)
