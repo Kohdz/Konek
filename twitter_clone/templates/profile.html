@@ -31,6 +31,11 @@
                         <i class="glyphicon glyphicon-th-list"></i> FOLLOWERS COUNT: 
                         <strong class="pull-right"> {{ followed_by| length }}</strong>
                     </li>
+                    {% if display_follow %}
+                    <li class="list-group-item">
+                        &nbsp; <strong class="pull-right"><a href=" {{ url_for('follow', username=current_user.username) }} ">FOLLOW</a></strong>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -77,6 +82,7 @@
                             
                             </div>
                             <div role="tabpanel" class="tab-pane" id="followings">
+                                {% for follower in followed_by %}
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="row pad">
@@ -85,13 +91,13 @@
                                             </div>
                                             <div class="col-lg-10">
                                                 <div>
-                                                    <strong class="mid">Naruto</strong> 
-                                                    <small><em>@RamenLife</em></small>
+                                                    <strong class="mid">{{ follower.name }}</strong> 
+                                                    <small><em> {{ follower.username }}</em></small>
                                                 </div>
                                                 <div class="row pad">
                                                     <hr />
                                                     <div class="col-lg-12">
-                                                        <i class="glyphicon glyphicon-th-list"></i> 2
+                                                        <i class="glyphicon glyphicon-th-list"></i> {{ follower.followed_by.all()| length }}
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     </div>
                                                 </div>
@@ -99,72 +105,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="row pad">
-                                            <div class="col-lg-2">
-                                                <img src="{{ url_for('static', filename='./imgs/amon.png') }}" class="img-circle" style="width: 60px; height: 60px;" />
-                                            </div>
-                                            <div class="col-lg-10">
-                                                <div>
-                                                    <strong class="mid">Dora</strong> 
-                                                    <small><em>@notExploring</em></small>
-                                                </div>
-                                                <div class="row pad">
-                                                    <hr />
-                                                    <div class="col-lg-12">
-                                                        <i class="glyphicon glyphicon-th-list"></i> 1,000
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="row pad">
-                                            <div class="col-lg-2">
-                                                <img src="{{ url_for('static', filename='./imgs/amon.png') }}" class="img-circle" style="width: 60px; height: 60px;" />
-                                            </div>
-                                            <div class="col-lg-10">
-                                                <div>
-                                                    <strong class="mid">Bloomberg</strong> 
-                                                    <small><em>@3termMayor</em></small>
-                                                </div>
-                                                <div class="row pad">
-                                                    <hr />
-                                                    <div class="col-lg-12">
-                                                        <i class="glyphicon glyphicon-th-list"></i> 159,453
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="row pad">
-                                            <div class="col-lg-2">
-                                                <img src="{{ url_for('static', filename='./imgs/amon.png') }}" class="img-circle" style="width: 60px; height: 60px;" />
-                                            </div>
-                                            <div class="col-lg-10">
-                                                <div>
-                                                    <strong class="mid">Tommy Pickles</strong> 
-                                                    <small><em>@rugRat1</em></small>
-                                                </div>
-                                                <div class="row pad">
-                                                    <hr />
-                                                    <div class="col-lg-12">
-                                                        <i class="glyphicon glyphicon-th-list"></i> 2,000,000
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
+    
                             </div>
                         </div>
                     </div>

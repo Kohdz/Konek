@@ -6,7 +6,7 @@ from flask_uploads import UploadSet, configure_uploads
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, current_user, logout_user
 from datetime import datetime
-from twitter_clone.models import User, Tweet
+from twitter_clone.models import User, Tweet, followers
 from twitter_clone.forms import RegisterForm, LoginForm, TweetForm,UpdateAccountForm
 from twitter_clone import app, login_manager, photos, db
 import secrets, os
@@ -33,6 +33,8 @@ def register():
 
         db.session.add(new_user)
         db.session.commit()
+
+        login_user(new_user)
         
         # flash message that user has been created
         flash('User has been succesfully created! Please log in!', 'success')
@@ -53,7 +55,7 @@ def login():
         # if username in database & pw correct
         # log the user in & flash success message
         if user and check_password_hash(user.password, form.password.data):
-            login_user(user)
+            login_user(user, remember=form.remember.data)
             flash('You have been successfully logged in', 'success')
             return redirect(url_for('profile'))
 
@@ -140,7 +142,18 @@ def profile(username):
     current_time = datetime.now()
     followed_by = user.followed_by.all()
 
-    return render_template('profile.html', title='Profile', current_user=user, tweets=tweets, current_time=current_time, followed_by=followed_by, image_file=image_file)
+    display_follow = True
+
+    if current_user == user:
+        display_follow = False
+    else:
+        if current_user in followed_by:
+            display_follow = False
+
+
+    return render_template('profile.html', title='Profile', current_user=user, tweets=tweets,
+         current_time=current_time, followed_by=followed_by, image_file=image_file,
+             display_follow=display_follow)
 
 
 # needs a login required route (commented until no more dummy data)
@@ -155,14 +168,18 @@ def timeline(username):
         if not user:
             abort(404)
     
+        tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).all()
+        total_tweets = len(tweets)
+
     else:
         user = current_user
+        tweets = Tweet.query.join(followers, (followers.c.following_id == Tweet.user_id)).filter(followers.c.follower_id == current_user.id).order_by(Tweet.date_created.desc()).all()
+        total_tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).count()
+    
+    
+
 
     
-    tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).all()
-
-
-    total_tweets = len(tweets)
 
     current_time = datetime.now()
 
