@@ -44,4 +44,4 @@ class Tweet(db.Model):
 
     # format of return string of "Tweet.query.__() terminal command"
     def __repr__(self):
-        return f'user id: {self.user_id} | tweet: {self.text}'
+        return f'tweet id: {self.id} user id: {self.user_id} | tweet: {self.text}'

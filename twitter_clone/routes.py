@@ -161,31 +161,31 @@ def profile(username):
 @app.route('/timeline', defaults={'username': None})
 @app.route('/timeline/<username>')
 def timeline(username):
+
     form = TweetForm()
 
     if username:
         user = User.query.filter_by(username=username).first()
         if not user:
             abort(404)
-    
         tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).all()
         total_tweets = len(tweets)
+        # need to fix image file
+        image_file = url_for('static', filename='imgs/' + current_user.image)
+
 
     else:
         user = current_user
         tweets = Tweet.query.join(followers, (followers.c.following_id == Tweet.user_id)).filter(followers.c.follower_id == current_user.id).order_by(Tweet.date_created.desc()).all()
         total_tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).count()
-    
 
     current_time = datetime.now()
-
     followed_by_count = user.followed_by.count()
-
     who_to_watch = User.query.filter(User.id != user.id).order_by(db.func.random()).limit(4).all()
 
     return render_template('timeline.html', title="Timeline", form=form, tweets=tweets,
          current_time=current_time, current_user=user, total_tweets=total_tweets, who_to_watch=who_to_watch,
-         followed_by_count=followed_by_count)
+         followed_by_count=followed_by_count, image_file=image_file)
 
 
 @app.route('/post_tweet', methods=['POST'])
@@ -199,10 +199,17 @@ def post_tweet():
         db.session.add(tweet)
         db.session.commit()
 
-
         return redirect(url_for('timeline'))
 
     flash('Something Went Wrong/Form Not Valid', 'danger')
+
+
+# tweet route for tweet id
+@app.route('/tweet/<int:tweet_id>')
+def view_tweet(tweet_id):
+    tweet = Tweet.query.get_or_404(tweet_id)
+    image_file = tweet.user.image
+    return render_template('view_tweet.html', tweet=tweet, image_file=image_file)
 
 
 @app.template_filter('time_passed')

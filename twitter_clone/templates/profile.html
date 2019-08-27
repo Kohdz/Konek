@@ -72,7 +72,7 @@
                                                     {{ (current_time - tweet.date_created) |time_passed }}
                                                 </div>
                                                 <div class="pad">
-                                                    {{ tweet.text }}
+                                                    <a href="{{ url_for('view_tweet', tweet_id=tweet.id) }}">{{ tweet.text }}</a>
                                                 </div>
                                             </div>
                                         </div>

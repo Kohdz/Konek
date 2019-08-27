@@ -2,16 +2,18 @@
 ######TODO######
 ################
 
+- make timeline show all tweets
+- commenting/reply system
+- search bar
+- fix profile pictures on profile.html and view_tweet.html
+
 
 ################
 #CHANGES I MADE#
 ################
 
-- template inheritance for index page [x]
-- Change Login modal to render from Login template [x]
-- Implemented to display flash messages in layout.html [x]
-- Remove Profile Picture submission on registration page [x]
-- Implement settings page - allows you to change profile picture, username, and email [x]
+- create individual tweet page [x]
+- redirect tweet from timeline & profile page to single tweet page [x]
 
 
 #################
@@ -23,3 +25,8 @@
 - log out button fully functional [x]
 - navbar showing different options depending on if user is logged in or logged out [x]
 - Create Tweet Database and create a relation with User [x]
+- template inheritance for index page [x]
+- Change Login modal to render from Login template [x]
+- Implemented to display flash messages in layout.html [x]
+- Remove Profile Picture submission on registration page [x]
+- Implement settings page - allows you to change profile picture, username, and email [x]
