@@ -2,18 +2,16 @@
 ######TODO######
 ################
 
-- make timeline show all tweets
-- commenting/reply system
 - search bar
-- fix profile pictures on profile.html and view_tweet.html
+- need to fix photo bugs 
 
 
 ################
 #CHANGES I MADE#
 ################
 
-- create individual tweet page [x]
-- redirect tweet from timeline & profile page to single tweet page [x]
+- fixed time bug on view tweet page [x]
+- commenting/reply system [x]
 
 
 #################
@@ -30,3 +28,5 @@
 - Implemented to display flash messages in layout.html [x]
 - Remove Profile Picture submission on registration page [x]
 - Implement settings page - allows you to change profile picture, username, and email [x]
+- create individual tweet page [x]
+- redirect tweet from timeline & profile page to single tweet page [x]

@@ -6,8 +6,9 @@ from flask_uploads import UploadSet, configure_uploads
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, current_user, logout_user
 from datetime import datetime
-from twitter_clone.models import User, Tweet, followers
-from twitter_clone.forms import RegisterForm, LoginForm, TweetForm,UpdateAccountForm
+from twitter_clone.models import User, Tweet, followers, Reply
+from twitter_clone.forms import (RegisterForm, LoginForm, TweetForm, 
+                                UpdateAccountForm, ReplyForm)
 from twitter_clone import app, login_manager, photos, db
 import secrets, os
 from PIL import Image
@@ -129,8 +130,6 @@ def update_account():
 @app.route('/profile/<username>')
 def profile(username):
 
-    image_file = url_for('static', filename='imgs/' + current_user.image)
-
     if username:
         user = User.query.filter_by(username=username).first()
         if not user:
@@ -138,6 +137,7 @@ def profile(username):
     else:
         user = current_user
 
+    image_file = url_for('static', filename='imgs/' + user.image)
     tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).all()
     current_time = datetime.now()
     followed_by = user.followed_by.all()
@@ -161,7 +161,7 @@ def profile(username):
 @app.route('/timeline', defaults={'username': None})
 @app.route('/timeline/<username>')
 def timeline(username):
-
+    image_file = url_for('static', filename='imgs/' + current_user.image)
     form = TweetForm()
 
     if username:
@@ -170,14 +170,15 @@ def timeline(username):
             abort(404)
         tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).all()
         total_tweets = len(tweets)
-        # need to fix image file
-        image_file = url_for('static', filename='imgs/' + current_user.image)
-
+        
 
     else:
         user = current_user
         tweets = Tweet.query.join(followers, (followers.c.following_id == Tweet.user_id)).filter(followers.c.follower_id == current_user.id).order_by(Tweet.date_created.desc()).all()
         total_tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).count()
+
+    # TODO: need to retrieve pic of author of tweets
+    user_pic = url_for('static', filename='imgs/' + user.image)
 
     current_time = datetime.now()
     followed_by_count = user.followed_by.count()
@@ -185,7 +186,7 @@ def timeline(username):
 
     return render_template('timeline.html', title="Timeline", form=form, tweets=tweets,
          current_time=current_time, current_user=user, total_tweets=total_tweets, who_to_watch=who_to_watch,
-         followed_by_count=followed_by_count, image_file=image_file)
+         followed_by_count=followed_by_count, image_file=image_file, user_pic=user_pic)
 
 
 @app.route('/post_tweet', methods=['POST'])
@@ -204,12 +205,32 @@ def post_tweet():
     flash('Something Went Wrong/Form Not Valid', 'danger')
 
 
-# tweet route for tweet id
 @app.route('/tweet/<int:tweet_id>')
 def view_tweet(tweet_id):
+    form = ReplyForm()
     tweet = Tweet.query.get_or_404(tweet_id)
-    image_file = tweet.user.image
-    return render_template('view_tweet.html', tweet=tweet, image_file=image_file)
+    replies = Reply.query.filter_by(tweet_id=tweet_id).order_by(Reply.date_created.desc()).all()
+    image_file = url_for('static', filename='imgs/' + tweet.user.image)
+    current_time = datetime.now()
+
+    return render_template('view_tweet.html', tweet=tweet, image_file=image_file, current_time=current_time, form=form, replies=replies)
+
+
+# reply form modal
+@app.route('/tweet/<int:tweet_id>/reply', methods=['POST'])
+@login_required
+def replies(tweet_id):
+    form = ReplyForm()
+    tweet = Tweet.query.get_or_404(tweet_id)
+
+    if form.validate():
+        reply = Reply(text=form.reply.data, name=current_user.name, username=current_user.username, tweet_id=tweet.id, date_created=datetime.now())
+        db.session.add(reply)
+        db.session.commit()
+        flash('reply posted!', 'success')
+        return redirect(url_for('view_tweet', tweet_id=tweet_id))
+
+    flash('Something Went Wrong/Form Not Valid', 'danger')
 
 
 @app.template_filter('time_passed')

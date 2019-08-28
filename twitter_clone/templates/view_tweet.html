@@ -1,8 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="col-lg-6">
-    <div class="panel panel-default">
-        <div class="panel-body">
+
+<div class="container">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="thumbnail">
@@ -10,12 +12,12 @@
                                 <div class="row">
                                     <div class="col-lg-10">
                                         <!-- <i class="glyphicon glyphicon-user"></i>  -->
-                                        <img src="{{ tweet.user.image_file }}" style="width: 30px; height: 30px;" class="img-circle">
-                                        <strong> {{ tweet.user.name }}</strong> 
-                                        <small><em>@ {{ tweet.user.username }}</em></small>
+                                        <img src="{{ image_file }}" style="width: 30px; height: 30px;" class="img-circle">
+                                        <strong>{{ tweet.user.name }}</strong> 
+                                        <small><em>@{{ tweet.user.username }}</em></small>
                                     </div>
                                     <div class="col-lg-2 text-right">
-                                        {{ (tweet.date_created.strftime('%Y-%m-%d')) }}
+                                        {{ (current_time - tweet.date_created) |time_passed }}
                                     </div>
                                 </div>
                                 <div class="row pad">
@@ -25,8 +27,82 @@
                                 </div>
                             </div>
                         </div>
+
+
+
+                                {% for reply in replies %}
+                                <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="thumbnail">
+                                                <div class="caption">
+                                                    <div class="row">
+                                                        <div class="col-lg-10">
+
+                                                            <img src="{{ image_file }}" style="width: 30px; height: 30px;" class="img-circle">
+                                                            <strong>{{ reply.name }}</strong>
+                                                            <small><em>@{{ reply.username }}</em></small>
+                                                        </div>
+                                                        <div class="col-lg-2 text-right">
+                                                            {{ (current_time - reply.date_created) |time_passed }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pad">
+                                                        <div class="col-lg-12">
+                                                            {{ reply.text }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <ul class="list-group">
+                                    <a class="list-group-item" data-toggle="modal" href="#newPost" data-backdrop="static" data-keboard="false">
+                                        <i class="glyphicon glyphicon-plus-sign"></i> Post Reply
+                                    </a>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+
+
+<div class="modal fade" id="newPost">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Post Reply</h4>
+            </div>
+
+            <form action="{{ url_for('replies', tweet_id=tweet.id) }}" method="POST">
+                <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="form-group">
+                            {{ form.csrf_token }}
+                            <label>Reply</label>
+                            {{ form.reply(class='form-control', rows=6, required=required,
+                            placeholder='Enter Your Reply Here')}}
+                        </div>
+                        <div class="form-group">
+                            By posting on our platform, you agree to our <a href="#">Terms and Conditions</a>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="glyphicon glyphicon-ban-circle"></i> Close
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-send"></i> Reply
+                </button>
+            </form>
+            </div>
         </div>
     </div>
 </div>
