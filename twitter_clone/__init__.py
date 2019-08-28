@@ -14,9 +14,9 @@ photos = UploadSet('photos', IMAGES)
 
 app.config['UPLOADED_PHOTOS_DEST'] = 'images'
 #dir alternative to flask
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Vicktree/Desktop/twitter-clone2/twitter_clone/twitterclone.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Vicktree/Desktop/twitter-clone2/twitter_clone/twitterclone.db'
 # joe's path to db
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///twitterclone.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///twitterclone.db'
 
 app.config['SECRET_KEY'] = 'test'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
