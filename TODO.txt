@@ -3,15 +3,12 @@
 ################
 
 - search bar
-- need to fix photo bugs 
 
 
 ################
 #CHANGES I MADE#
 ################
 
-- fixed time bug on view tweet page [x]
-- commenting/reply system [x]
 
 
 #################
@@ -22,11 +19,15 @@
 - fixed up directory tree [x]
 - log out button fully functional [x]
 - navbar showing different options depending on if user is logged in or logged out [x]
-- Create Tweet Database and create a relation with User [x]
+- create Tweet Database and create a relation with User [x]
 - template inheritance for index page [x]
-- Change Login modal to render from Login template [x]
-- Implemented to display flash messages in layout.html [x]
-- Remove Profile Picture submission on registration page [x]
-- Implement settings page - allows you to change profile picture, username, and email [x]
+- change Login modal to render from Login template [x]
+- implemented to display flash messages in layout.html [x]
+- remove Profile Picture submission on registration page [x]
+- implement settings page - allows you to change profile picture, username, and email [x]
 - create individual tweet page [x]
 - redirect tweet from timeline & profile page to single tweet page [x]
+- fixed time bug on view tweet page [x]
+- commenting/reply system [x]
+- fixed photo bugs on timeline and view tweet [x]
+- log in and sign up buttons on login/register templates [x]

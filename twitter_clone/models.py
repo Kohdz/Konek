@@ -50,6 +50,7 @@ class Tweet(db.Model):
 class Reply(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tweet_id = db.Column(db.Integer, db.ForeignKey('tweet.id'))
+    image = db.Column(db.String, db.ForeignKey('user.image'))
     name = db.Column(db.String, db.ForeignKey('user.name'))
     username = db.Column(db.String, db.ForeignKey('user.username'))
     text = db.Column(db.String(140))
