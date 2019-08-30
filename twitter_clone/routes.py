@@ -161,6 +161,7 @@ def profile(username):
 @app.route('/timeline', defaults={'username': None})
 @app.route('/timeline/<username>')
 def timeline(username):
+    # current
     image_file = url_for('static', filename='imgs/' + current_user.image)
     form = TweetForm()
 
@@ -177,16 +178,13 @@ def timeline(username):
         tweets = Tweet.query.join(followers, (followers.c.following_id == Tweet.user_id)).filter(followers.c.follower_id == current_user.id).order_by(Tweet.date_created.desc()).all()
         total_tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).count()
 
-    # TODO: need to retrieve pic of author of tweets
-    user_pic = url_for('static', filename='imgs/' + user.image)
-
     current_time = datetime.now()
     followed_by_count = user.followed_by.count()
     who_to_watch = User.query.filter(User.id != user.id).order_by(db.func.random()).limit(4).all()
 
     return render_template('timeline.html', title="Timeline", form=form, tweets=tweets,
          current_time=current_time, current_user=user, total_tweets=total_tweets, who_to_watch=who_to_watch,
-         followed_by_count=followed_by_count, image_file=image_file, user_pic=user_pic)
+         followed_by_count=followed_by_count, image_file=image_file)
 
 
 @app.route('/post_tweet', methods=['POST'])
@@ -213,7 +211,7 @@ def view_tweet(tweet_id):
     image_file = url_for('static', filename='imgs/' + tweet.user.image)
     current_time = datetime.now()
 
-    return render_template('view_tweet.html', tweet=tweet, image_file=image_file, current_time=current_time, form=form, replies=replies)
+    return render_template('view_tweet.html', tweet=tweet, current_time=current_time, form=form, replies=replies, image_file=image_file)
 
 
 # reply form modal
@@ -222,9 +220,10 @@ def view_tweet(tweet_id):
 def replies(tweet_id):
     form = ReplyForm()
     tweet = Tweet.query.get_or_404(tweet_id)
+    reply_user_image = url_for('static', filename='imgs/' + current_user.image)
 
     if form.validate():
-        reply = Reply(text=form.reply.data, name=current_user.name, username=current_user.username, tweet_id=tweet.id, date_created=datetime.now())
+        reply = Reply(text=form.reply.data, name=current_user.name, username=current_user.username, image=reply_user_image, tweet_id=tweet.id, date_created=datetime.now())
         db.session.add(reply)
         db.session.commit()
         flash('reply posted!', 'success')

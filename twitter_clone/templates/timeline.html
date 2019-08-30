@@ -50,7 +50,7 @@
                                             <div class="col-lg-10">
                                                 <!-- <i class="glyphicon glyphicon-user"></i>  -->
                                                 <!-- <img src="{{ url_for('static', filename='./imgs/amon.png') }}" style="width: 30px; height: 30px;" class="img-circle"> -->
-                                                <img src="{{ user_pic }}" style=" width: 30px; height: 30px;" class="img-circle">
+                                                <img src="{{ url_for('static', filename='imgs/' + tweet.user.image) }}" style=" width: 30px; height: 30px;" class="img-circle">
                                                 <strong> {{ tweet.user.name }}</strong> 
                                                 <small><em>@ {{ tweet.user.username }}</em></small>
                                             </div>
