@@ -59,4 +59,18 @@ class Tweet(db.Model):
 
     # format of return string of "Tweet.query.__() terminal command"
     def __repr__(self):
-        return f'user id: {self.user_id} | tweet: {self.text}'
+        return f'tweet id: {self.id} | user id: {self.user_id} | tweet: {self.text}'
+
+
+class Reply(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tweet_id = db.Column(db.Integer, db.ForeignKey('tweet.id'))
+    image = db.Column(db.String, db.ForeignKey('user.image'))
+    name = db.Column(db.String, db.ForeignKey('user.name'))
+    username = db.Column(db.String, db.ForeignKey('user.username'))
+    text = db.Column(db.String(140))
+    date_created = db.Column(db.DateTime)
+
+    # format of return string of "Reply.query.__() terminal command"
+    def __repr__(self):
+        return f'reply id: {self.id} | reply text: {self.text} | user: {self.username} | tweet text: {self.tweet_id.text}'

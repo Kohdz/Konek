@@ -60,3 +60,7 @@ class UpdateAccountForm(FlaskForm):
 
 class TweetForm(FlaskForm):
     text = TextAreaField('Message', validators=[InputRequired('Message is Required')])
+
+
+class ReplyForm(FlaskForm):
+    reply = StringField('Enter your reply here', validators=[InputRequired('Comment is Required')])
