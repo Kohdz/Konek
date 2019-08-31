@@ -20,7 +20,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:/Users/Vicktree/Desktop/twi
 
 app.config['SECRET_KEY'] = 'test'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['DEBUG'] = True
+# app.config['DEBUG'] = True
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'

@@ -10,6 +10,11 @@ followers = db.Table('Followers',
     db.Column('following_id', db.Integer, db.ForeignKey('user.id'))
     )
 
+likers = db.Table('Likers',
+    db.Column('liker_id',  db.Integer, db.ForeignKey('user.id')),
+    db.Column('liked_id', db.Integer, db.ForeignKey('user.id'))
+    )
+
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -30,6 +35,16 @@ class User(UserMixin, db.Model):
         primaryjoin=(followers.c.following_id == id),
         secondaryjoin=(followers.c.follower_id == id),
         backref=db.backref('follower', lazy='dynamic'), lazy='dynamic')
+
+    liked = db.relationship('User', secondary=likers,
+        primaryjoin=(likers.c.liker_id == id),
+        secondaryjoin=(likers.c.liked_id == id),
+        backref=db.backref('likers', lazy='dynamic'), lazy='dynamic')
+
+    liked_by = db.relationship('User', secondary=likers,
+        primaryjoin=(likers.c.liked_id == id), 
+        secondaryjoin=(likers.c.liker_id == id),
+        backref=db.backref('liker', lazy='dynamic'), lazy='dynamic')
 
     # format of return string of "User.query.__() terminal command"
     def __repr__(self):

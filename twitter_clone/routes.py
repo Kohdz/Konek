@@ -144,6 +144,8 @@ def profile(username):
 
     display_follow = True
 
+    liked_by= user.liked_by.all()
+
     if current_user == user:
         display_follow = False
     else:
@@ -153,7 +155,7 @@ def profile(username):
 
     return render_template('profile.html', title='Profile', current_user=user, tweets=tweets,
          current_time=current_time, followed_by=followed_by, image_file=image_file,
-             display_follow=display_follow)
+             display_follow=display_follow, liked_by=liked_by)
 
 
 # needs a login required route (commented until no more dummy data)
@@ -180,12 +182,13 @@ def timeline(username):
     current_time = datetime.now()
 
     followed_by_count = user.followed_by.count()
+    liked_by_count = user.liked_by.count()
 
     who_to_watch = User.query.filter(User.id != user.id).order_by(db.func.random()).limit(4).all()
 
     return render_template('timeline.html', title="Timeline", form=form, tweets=tweets,
          current_time=current_time, current_user=user, total_tweets=total_tweets, who_to_watch=who_to_watch,
-         followed_by_count=followed_by_count)
+         followed_by_count=followed_by_count, liked_by_count=liked_by_count)
 
 
 @app.route('/post_tweet', methods=['POST'])
@@ -236,6 +239,9 @@ def follow(username):
     return redirect(url_for('profile'))
 
 
+# give  a tweet a like paramater
+#then make a url where the like goes by a count of 1
+# @app.route('/like/<tweet>')
 
 
 
