@@ -25,7 +25,7 @@ html {
 }
 
 body {
-    margin: 0
+    margin: 0;
 }
 
 article,
@@ -1399,7 +1399,7 @@ html {
 
 body {
     font-family: "Ubuntu", Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 3rem;
     line-height: 1.42857143;
     color: #333333;
     background-color: #ffffff
@@ -2015,7 +2015,8 @@ pre code {
     margin-right: auto;
     margin-left: auto;
     padding-left: 15px;
-    padding-right: 15px
+    padding-right: 15px;
+    margin-top: 2rem;
 }
 
 .row {
@@ -5019,7 +5020,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 
 .navbar {
     position: relative;
-    min-height: 50px;
+    min-height: 3rem;
     margin-bottom: 20px;
     border: 1px solid transparent
 }
@@ -5144,7 +5145,7 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 .navbar-brand {
     float: left;
     padding: 15px 15px;
-    font-size: 18px;
+    font-size: 6rem;
     line-height: 20px;
     height: 50px
 }
@@ -5161,7 +5162,8 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 @media (min-width:768px) {
     .navbar>.container .navbar-brand,
     .navbar>.container-fluid .navbar-brand {
-        margin-left: -15px
+        margin-left: -15px;
+        margin-bottom: 17px;
     }
 }
 
