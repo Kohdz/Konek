@@ -63,4 +63,8 @@ class TweetForm(FlaskForm):
 
 
 class ReplyForm(FlaskForm):
-    reply = StringField('Enter your reply here', validators=[InputRequired('Comment is Required')])
+    reply = TextAreaField('Enter your reply here', validators=[InputRequired('Comment is Required')])
+
+
+class SearchForm(FlaskForm):
+    text = StringField('What would you like to search for?', validators=[InputRequired('Search query is Required')])

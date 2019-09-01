@@ -3,6 +3,12 @@
 ################
 
 - search bar
+    i. no form.text.data?
+    ii. merge tables in data to query all of them at once
+- set postgresql database on server
+- footer
+- implement recaptcha on sign up page
+- blueprints
 
 
 ################

@@ -8,7 +8,7 @@ from flask_login import login_user, login_required, current_user, logout_user
 from datetime import datetime
 from twitter_clone.models import User, Tweet, followers, Reply
 from twitter_clone.forms import (RegisterForm, LoginForm, TweetForm, 
-                                UpdateAccountForm, ReplyForm)
+                                UpdateAccountForm, ReplyForm, SearchForm)
 from twitter_clone import app, login_manager, photos, db
 import secrets, os
 from PIL import Image
@@ -263,7 +263,23 @@ def follow(username):
     return redirect(url_for('profile'))
 
 
+#############################################################################
+''' Search Bar Routes '''
 
+# create search form
+# create routes
+# display search bar on layout.html
+# query results with input in bar
 
+# TODO: not getting search query?
+@app.route('/search', methods=['GET','POST'])
+def search():
+    form = SearchForm()
+    if request.method == 'POST':
+        if form.text.data:
+            search_term = form.text.data
+            results = User.query.all()
+            print(f'{search_term}')
+            return render_template('search_results.html', form=form, results=results, query=search_term)
 
-        
+    return render_template('timeline.html', form=form)

@@ -15,11 +15,18 @@
 					<p class="title">
 						<a href="./">twitter-clone</a>
 					</p>
-					<p class="subtitle">...less toxic then the actual twitter</p>
-				</div>
+                    <p class="subtitle">...less toxic then the actual twitter</p>
+                    
+                    <form class="form-inline md-form mr-auto mb-4" action="{{ url_for('search') }}" method="POST">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
+                    </form>
+                    
+                </div>
 			</div>
         </div>
-
+        
+       
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -36,6 +43,7 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
+                        
                         {% if current_user.is_authenticated %}
                             <li class="active"><a href="{{ url_for('timeline') }}">Timeline</a></li>
                             <li class=""><a href="{{ url_for('profile') }}">My Profile</a></li>
