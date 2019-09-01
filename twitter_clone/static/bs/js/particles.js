@@ -7,8 +7,8 @@ function Particle(location, color){
   
 
   this.show = function(){
-    stroke(75,0,130); //stroke(255);
-    strokeWeight(4);  //strokeWeight(4)
+    stroke('rgba(75,0,130, .5)'); //stroke(255);
+    strokeWeight(6);  //strokeWeight(4)
     point(this.location.x,this.location.y);
 
   }

@@ -182,20 +182,13 @@ def timeline(username):
 
     current_time = datetime.now()
     followed_by_count = user.followed_by.count()
-<<<<<<< HEAD
     liked_by_count = user.liked_by.count()
 
-=======
->>>>>>> e3d54dd56111e038ac45992e814c4a2c6f791503
     who_to_watch = User.query.filter(User.id != user.id).order_by(db.func.random()).limit(4).all()
 
     return render_template('timeline.html', title="Timeline", form=form, tweets=tweets,
          current_time=current_time, current_user=user, total_tweets=total_tweets, who_to_watch=who_to_watch,
-<<<<<<< HEAD
          followed_by_count=followed_by_count, liked_by_count=liked_by_count)
-=======
-         followed_by_count=followed_by_count, image_file=image_file)
->>>>>>> e3d54dd56111e038ac45992e814c4a2c6f791503
 
 
 @app.route('/post_tweet', methods=['POST'])
