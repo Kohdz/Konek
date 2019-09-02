@@ -2,9 +2,7 @@
 ######TODO######
 ################
 
-- search bar
-    i. no form.text.data?
-    ii. merge tables in data to query all of them at once
+- bug fix for search url parameter
 - set postgresql database on server
 - footer
 - implement recaptcha on sign up page
@@ -15,6 +13,9 @@
 #CHANGES I MADE#
 ################
 
+- search bar
+    i. fixed form.text.data bug [x]
+    ii. queried all of the tables at once [x]
 
 
 #################

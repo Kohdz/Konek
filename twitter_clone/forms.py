@@ -67,4 +67,4 @@ class ReplyForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
-    text = StringField('What would you like to search for?', validators=[InputRequired('Search query is Required')])
+    text = StringField('Search', validators=[InputRequired('Search query is Required')])

@@ -13,6 +13,8 @@ from twitter_clone import app, login_manager, photos, db
 import secrets, os
 from PIL import Image
 
+import sqlite3
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -21,7 +23,8 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-    return render_template('index.html', title='Homepage')
+    form = SearchForm()
+    return render_template('index.html', title='Homepage', form=form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -266,20 +269,31 @@ def follow(username):
 #############################################################################
 ''' Search Bar Routes '''
 
-# create search form
-# create routes
-# display search bar on layout.html
-# query results with input in bar
-
-# TODO: not getting search query?
-@app.route('/search', methods=['GET','POST'])
+@app.route('/search', methods=['POST'])
 def search():
     form = SearchForm()
-    if request.method == 'POST':
-        if form.text.data:
-            search_term = form.text.data
-            results = User.query.all()
-            print(f'{search_term}')
-            return render_template('search_results.html', form=form, results=results, query=search_term)
+    if form.validate_on_submit():
+        query = form.text.data
+        search_database(db, query)
+        return render_template('search_results.html', form=form, results=search_database(db, query), query=query)
 
-    return render_template('timeline.html', form=form)
+
+def search_database(database, query):
+    # define full path with //
+    connect = sqlite3.connect('/home/joe/Projects/twitter-clone-v1/twitter_clone/twitterclone.db')
+    cur = connect.cursor()
+    cur.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    for tablerow in cur.fetchall():
+        # finds all the tables in database
+        table = tablerow[0]
+        cur.execute(f"SELECT * FROM {table}")
+
+        results = []
+        for row in cur:
+            for field in row:
+                if query in str(field):
+                    # TODO: need to get the row[0] name aka the column name of field
+                    print(f'found {query}: {field} in row {row[0]} inside the {table} table')
+                    results.append(field)
+
+        return results
