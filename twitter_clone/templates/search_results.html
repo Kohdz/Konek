@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class='container'>
+    <ul>You searched for: {{ query }}</ul>
+    {% for result in results %}
+        <ul>
+            {{ result }}
+        </ul>
+    {% endfor %}
+</div>
+{% endblock %}

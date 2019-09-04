@@ -13,13 +13,38 @@
 			<div class="row" id="banner">
 				<div class="title col-lg-12">
 					<p class="title">
-						<a href="./">twitter-clone</a>
-					</p>
-					<p class="subtitle">...less toxic then the actual twitter</p>
-				</div>
+                        <a href="./">twitter-clone</a>
+                        <p class="subtitle">...less toxic then the actual twitter</p>
+                    </p>
+
+                    <form class="form-inline" action="{{ url_for('search', query=query) }}" method="POST">
+                    {{ form.csrf_token }}
+                    <div style="text-align: right;">
+
+                    <div class="form-group">
+                        {{ form.text.label(class="form-control-label") }}
+        
+                        {% if form.text.errors %}
+                            {{ form.text(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.text.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.text(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+            
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
+                    </div>
+                    
+                </div>
 			</div>
         </div>
-
+        
+       
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -36,6 +61,7 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
+                        
                         {% if current_user.is_authenticated %}
                             <li class="active"><a href="{{ url_for('timeline') }}">Timeline</a></li>
                             <li class=""><a href="{{ url_for('profile') }}">My Profile</a></li>

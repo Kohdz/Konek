@@ -2,13 +2,20 @@
 ######TODO######
 ################
 
-- search bar
+- bug fix for search url parameter
+- set postgresql database on server
+- footer
+- implement recaptcha on sign up page
+- blueprints
 
 
 ################
 #CHANGES I MADE#
 ################
 
+- search bar
+    i. fixed form.text.data bug [x]
+    ii. queried all of the tables at once [x]
 
 
 #################
