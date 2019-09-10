@@ -2,20 +2,19 @@
 ######TODO######
 ################
 
-- bug fix for search url parameter
-- set postgresql database on server
-- footer
+- fix bug for search bar
+- set up postgresql database on server
 - implement recaptcha on sign up page
-- blueprints
+- error pages
+- config.py (?)
+- footer (?)
 
 
 ################
 #CHANGES I MADE#
 ################
 
-- search bar
-    i. fixed form.text.data bug [x]
-    ii. queried all of the tables at once [x]
+- implemented blueprints
 
 
 #################
@@ -38,3 +37,6 @@
 - commenting/reply system [x]
 - fixed photo bugs on timeline and view tweet [x]
 - log in and sign up buttons on login/register templates [x]
+- search bar
+    i. fixed form.text.data bug [x]
+    ii. queried all of the tables at once [x]

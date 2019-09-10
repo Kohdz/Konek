@@ -16,34 +16,6 @@
                         <a href="./">twitter-clone</a>
                         <p class="subtitle">...less toxic then the actual twitter</p>
                     </p>
-
-                    <form class="form-inline" action="{{ url_for('search', query=query) }}" method="POST">
-                    {{ form.csrf_token }}
-                    <div style="text-align: right;">
-
-                    <div class="form-group">
-                        {{ form.text.label(class="form-control-label") }}
-        
-                        {% if form.text.errors %}
-                            {{ form.text(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.text.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.text(class="form-control form-control-lg") }}
-                        {% endif %}
-                    </div>
-            
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
-                    </div>
-                    
-                </div>
-			</div>
-        </div>
-        
        
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">
@@ -55,7 +27,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="{{ url_for('index') }}">twitter-clone</a>
+					<a class="navbar-brand" href="{{ url_for('main.index') }}">twitter-clone</a>
 				</div>
 		
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -63,13 +35,13 @@
 					<ul class="nav navbar-nav navbar-right">
                         
                         {% if current_user.is_authenticated %}
-                            <li class="active"><a href="{{ url_for('timeline') }}">Timeline</a></li>
-                            <li class=""><a href="{{ url_for('profile') }}">My Profile</a></li>
-                            <li class=""><a href="{{ url_for('update_account') }}">Update Account</a></li>
-                            <li class=""><a href="{{ url_for('logout') }}">Logout</a></li>
+                            <li class="active"><a href="{{ url_for('users.timeline') }}">Timeline</a></li>
+                            <li class=""><a href="{{ url_for('users.profile') }}">My Profile</a></li>
+                            <li class=""><a href="{{ url_for('users.update_account') }}">Update Account</a></li>
+                            <li class=""><a href="{{ url_for('users.logout') }}">Logout</a></li>
                         {% else %}
-                            <li class=""><a href="{{ url_for('register') }}">Sign Up</a></li>
-                            <li class=""><a href="{{ url_for('login') }}">Log In</a></li>
+                            <li class=""><a href="{{ url_for('main.register') }}">Sign Up</a></li>
+                            <li class=""><a href="{{ url_for('users.login') }}">Log In</a></li>
                         {% endif %}
 					</ul>
                 </div>
