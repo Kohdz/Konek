@@ -43,7 +43,7 @@
                     {% for tweet in tweets %}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <a href="{{ url_for('view_tweet', tweet_id=tweet.id) }}">
+                                <a href="{{ url_for('tweets.view_tweet', tweet_id=tweet.id) }}">
                                 <div class="thumbnail">
                                     <div class="caption">
                                         <div class="row">
@@ -107,7 +107,7 @@
                         <li class="list-group-item">
                             {{ user.name }} 
                             <div>
-                                <strong><a href="{{ url_for('profile', username=user.username) }}"> @ {{ user.username }}</a></strong> 
+                                <strong><a href="{{ url_for('users.profile', username=user.username) }}"> @ {{ user.username }}</a></strong> 
                                 <span class="pull-right">
                                     {{ user.followed_by.all() |length }} Followers
                                 </span>
@@ -133,7 +133,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Post New Message</h4>
                 </div>
-                <form action="{{ url_for('post_tweet')}}" method="POST">
+                <form action="{{ url_for('tweets.post_tweet')}}" method="POST">
                     <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2">

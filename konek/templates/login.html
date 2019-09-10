@@ -7,7 +7,7 @@
 
             <br/>
 
-            <form action="{{ url_for('login') }}" method="POST">
+            <form action="{{ url_for('users.login') }}" method="POST">
             {{ form.csrf_token }}
 
             <div class="form-group">
@@ -45,7 +45,7 @@
             </div>
             <div class="border-top pt-3">
                 <small class="text-muted">
-                    Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up</a>
+                    Need An Account? <a class="ml-2" href="{{ url_for('main.register') }}">Sign Up</a>
                 </small>
             </div>
             </form>
