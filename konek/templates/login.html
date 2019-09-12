@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+
+<div class="col-lg-3" id="login-form">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row pad">
+                    <div class="col-lg-12">
+                    
+<div class="container-fluid">
+        <div class="row pad">
+            <div class="col-lg-12 col-lg-offset-0 pad">
+                <h2 class="text-center bold">Konked</h2>
+    
+                <br/>
+    
+                <form action="{{ url_for('users.login') }}" method="POST">
+                {{ form.csrf_token }}
+    
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+    
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+    
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+                    
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+    
+                <div class="form-group">
+                    <button type="submit" class="btn btn btn-dark btn-block">Log In</button>
+                </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+                        
+                    </div>
+                </div>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Need An Account? <a class="ml-2" href="{{ url_for('main.register') }}">Sign Up</a>
+                    </small>
+                </div>
+     
+            </div>
+        </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

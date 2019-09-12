@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{{ title }}</title>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{{url_for('static', filename='./bs/css/united.min.css') }}">
+        <link rel="stylesheet" href="{{url_for('static', filename='./css/styles.css') }}">
+        <link rel="stylesheet" type='text/css' href="https://fonts.googleapis.com/css?family=Lato:400,700" />
+       
+        <script src="{{ url_for('static', filename='bs/js/p5.js') }}"></script>
+        <script src="{{ url_for('static', filename='bs/js/p5.dom.js') }}"></script>
+        <script src="{{ url_for('static', filename='bs/js/sketch.js') }}"></script>
+        <script src="{{ url_for('static', filename='bs/js/particles.js') }}"></script>
+
+		<nav class="navbar navbar-default"  role="navigation">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="{{ url_for('main.index') }}">konek</a>
+				</div>
+		
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<ul class="nav navbar-nav navbar-right">
+                        
+                        {% if current_user.is_authenticated %}
+                            <li class="active"><a href="{{ url_for('users.timeline') }}">Timeline</a></li>
+                            <li class=""><a href="{{ url_for('users.profile') }}">My Profile</a></li>
+                            <li class=""><a href="{{ url_for('users.update_account') }}">Update Account</a></li>
+                            <li class=""><a href="{{ url_for('users.logout') }}">Logout</a></li>
+                        {% else %}
+                            <li class=""><a href="{{ url_for('main.register') }}">Sign Up</a></li>
+                            <li class=""><a href="{{ url_for('users.login') }}">Log In</a></li>
+                        {% endif %}
+					</ul>
+                </div>
+			</div>
+        </nav>
+    </head>
+
+	<body>
+    <div class="container">
+        <div class="row">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class='alert-{{ category }}'>
+                        {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            </div>
+        </div>
+    </div>
+        {% block content %}{% endblock %}      
+    </body>
+
+    <!-- jQuery -->
+        <script src="{{ url_for('static', filename='bs/js/jquery.min.js') }}"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="{{ url_for('static', filename='bs/js/bootstrap.min.js') }}"></script>
+</html>

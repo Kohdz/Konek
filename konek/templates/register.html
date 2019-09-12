@@ -1,13 +1,21 @@
 {% extends "layout.html" %}
+
 {% block content %}
+
+<div class="col-lg-3" id="login-form">
+    <div class="panel panel-default">
+        <div class="panel-body" id="panel-body-registration">
+            <div class="row pad">
+                <div class="col-lg-12">
+
 <div class="container-fluid">
     <div class="row pad">
-        <div class="col-lg-4 col-lg-offset-4 pad">
+        <div class="col-lg-12 col-lg-offset-0 pad">
             <h2 class="text-center bold">Join twitter-clone</h2>
 
             <br/>
 
-            <form action="{{ url_for('register') }}" method="POST">
+            <form action="{{ url_for('main.register') }}" method="POST">
             {{ form.csrf_token }}
 
 
@@ -91,10 +99,17 @@
             </div>
             <div class="border-top pt-3">
                 <small class="text-muted">
-                    Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Log In</a>
+                    Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Log In</a>
                 </small>
             </div>
             </form>
+        </div>
+    </div>
+</div>
+
+</div>
+        </div>
+     
         </div>
     </div>
 </div>

@@ -2,9 +2,9 @@ from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import InputRequired, Length, ValidationError, Email, EqualTo
-from wtforms import StringField, PasswordField, BooleanField, TextAreaField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from flask_uploads import IMAGES
-from twitter_clone.models import User
+from konek.models import User
 
 
 class RegisterForm(FlaskForm):
@@ -56,15 +56,3 @@ class UpdateAccountForm(FlaskForm):
             email = User.filter_by(email=email.data).first()
             if email:
                 raise ValidationError('That email is taken. Please choose a different one.')
-
-
-class TweetForm(FlaskForm):
-    text = TextAreaField('Message', validators=[InputRequired('Message is Required')])
-
-
-class ReplyForm(FlaskForm):
-    reply = TextAreaField('Enter your reply here', validators=[InputRequired('Comment is Required')])
-
-
-class SearchForm(FlaskForm):
-    text = StringField('Search', validators=[InputRequired('Search query is Required')])

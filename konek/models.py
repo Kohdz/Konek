@@ -1,5 +1,5 @@
 from flask_login import LoginManager, UserMixin
-# from twitter_clone import db
+# from konek import db
 from . import db
 
 

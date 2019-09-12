@@ -1,0 +1,97 @@
+body {
+    font-family: 'Lato', sans-serif;}
+
+#login-form{
+    min-width: 70%;
+   
+    margin:  auto;
+    margin-top: 6rem;
+    float: none;
+}
+
+.panel-body {
+    margin-top: 2.5rem;
+    height: 40rem;
+    padding: 0
+}
+
+#panel-body-registration{
+    height: 66rem;
+}
+
+.panel {
+    background: rgba(225,225,225,.4);
+    margin: auto;
+}
+
+.panel-default{
+    max-width: 50rem;
+}
+
+#whoToFollow {
+
+    height: 5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+svg{
+    width: 85vw;
+    margin-top: 2rem;
+    margin-left: 4rem
+}
+
+/* svg:hover {
+    color: blue;
+} */
+
+.btn-block {
+    margin: auto;
+    width: 10rem;
+}
+
+.border-top {
+    margin-top: 5.7rem;
+    float: right;
+    padding-right: 1rem;
+}
+
+
+
+.Fill-1:hover {
+    fill: rgba(51,153,225, .7);
+}
+
+.Fill-2:hover {
+    fill: rgba(51,225,51, .7);
+}
+
+.Fill-3:hover {
+    fill: rgba(225,153,51, .7);
+}
+
+.Fill-4:hover {
+    fill: rgba(204,0,204, .7);
+}
+
+.Fill-5:hover {
+    fill: rgba(225,225,51, .7);
+}
+.Fill-6:hover {
+    fill: rgba(255,153,51, .7);
+}
+.Fill-7:hover {
+    fill: rgba(225,51,51, .7);
+}
+.Fill-8:hover {
+    fill: rgba(51,225,51, .7);
+}
+.Fill-9:hover {
+    fill: rgba(225,225, 51, .7);
+}
+.Fill-10:hover {
+    fill: rgba(153, 255, 153, .7);
+}
+.Fill-11:hover {
+    fill: rgba(255, 51, 255, .7);
+}
