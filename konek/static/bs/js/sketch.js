@@ -4,14 +4,11 @@ let gravity;
 let repeller;
 let wh = window.innerHeight
 
-if  (wh >= 640){
+if  (wh <= 640){
   total = 15
-}
-
-if (wh >= 1024) {
+} else if (wh <= 1024) {
   total = 55
-}
-if (wh >= 1366) {
+} else {
   total = 70
 }
 
