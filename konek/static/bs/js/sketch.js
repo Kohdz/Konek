@@ -1,7 +1,22 @@
-let total = 90;
+// let total = 90;
 let systems;
 let gravity;
 let repeller;
+let wh = window.innerHeight
+
+if  (wh >= 640){
+  total = 15
+}
+
+if (wh >= 1024) {
+  total = 55
+}
+if (wh >= 1366) {
+  total = 70
+}
+
+
+
 
 function setup() {
 

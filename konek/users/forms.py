@@ -1,5 +1,6 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
+from flask_wtf.recaptcha import RecaptchaField
 from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import InputRequired, Length, ValidationError, Email, EqualTo
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
@@ -16,6 +17,7 @@ class RegisterForm(FlaskForm):
     password = PasswordField('Password', validators=[InputRequired('A password is required')])
     confirm_password = PasswordField('Confirm Password', validators=[InputRequired(), EqualTo('password')])
     image = FileField(validators=[FileAllowed(IMAGES, 'Only Images Are Accepted')])
+    Recaptcha = RecaptchaField()
 
     # method to check whether the user name is taken or not
     def validate_username(self, username):
