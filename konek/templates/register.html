@@ -15,9 +15,8 @@
 
             <br/>
 
-            <form action="{{ url_for('main.register') }}" method="POST">
+            <form action="{{ url_for('users.register') }}" method="POST">
             {{ form.csrf_token }}
-
 
             <div class="form-group">
                 {{ form.name.label(class="form-control-label") }}
@@ -36,7 +35,6 @@
 
             <div class="form-group">
                 {{ form.username.label(class="form-control-label") }}
-                
 
                 {% if form.username.errors %}
                     {{ form.username(class="form-control form-control-lg is-invalid") }}
@@ -97,7 +95,7 @@
 
             <div class="form-group">
                 <button type="submit" class="btn btn-danger btn-block">Sign up</button>
-                {{ form.recaptcha }}
+                <!-- {{ form.recaptcha }} -->
             </div>
             <div class="border-top pt-3">
                 <small class="text-muted">

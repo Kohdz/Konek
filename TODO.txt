@@ -2,19 +2,23 @@
 ######TODO######
 ################
 
+- unfollow button
+- comment/like
 - fix bug for search bar
-- set up postgresql database on server
 - implement recaptcha on sign up page
 - error pages
-- config.py (?)
-- footer (?)
 
 
 ################
 #CHANGES I MADE#
 ################
 
-- implemented blueprints
+- set up postgresql database on server
+- fixed timeline template
+- fixed reply bug
+- implemented reply redirect to profile page
+- fixed follow profile bug
+- formatted python files with yapf
 
 
 #################
@@ -40,3 +44,4 @@
 - search bar
     i. fixed form.text.data bug [x]
     ii. queried all of the tables at once [x]
+- implemented blueprints
