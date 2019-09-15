@@ -3,7 +3,6 @@ from konek.search.forms import SearchForm
 from konek.search.utils import search_database
 from konek import db
 
-
 search = Blueprint('search', __name__)
 
 
@@ -13,4 +12,7 @@ def search_bar():
     if form.validate_on_submit():
         query = form.text.data
         search_database(db, query)
-        return render_template('search_results.html', form=form, results=search_database(db, query), query=query)
+        return render_template('search_results.html',
+                               form=form,
+                               results=search_database(db, query),
+                               query=query)

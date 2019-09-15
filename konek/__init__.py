@@ -7,7 +7,6 @@ from flask_login import LoginManager
 from flask_uploads import IMAGES
 from konek.config import Config
 
-
 app = Flask(__name__)
 app.config.from_object(Config)
 photos = UploadSet('photos', IMAGES)

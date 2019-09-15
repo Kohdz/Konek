@@ -38,7 +38,7 @@
                             <li class=""><a href="{{ url_for('users.update_account') }}">Update Account</a></li>
                             <li class=""><a href="{{ url_for('users.logout') }}">Logout</a></li>
                         {% else %}
-                            <li class=""><a href="{{ url_for('main.register') }}">Sign Up</a></li>
+                            <li class=""><a href="{{ url_for('users.register') }}">Sign Up</a></li>
                             <li class=""><a href="{{ url_for('users.login') }}">Log In</a></li>
                         {% endif %}
 					</ul>

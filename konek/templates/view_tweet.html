@@ -11,10 +11,9 @@
                             <div class="caption">
                                 <div class="row">
                                     <div class="col-lg-10">
-                                        <!-- <i class="glyphicon glyphicon-user"></i>  -->
                                         <img src="{{ image_file }}" style="width: 30px; height: 30px;" class="img-circle">
                                         <strong>{{ tweet.user.name }}</strong> 
-                                        <small><em>@{{ tweet.user.username }}</em></small>
+                                        <small><a href="{{ url_for('users.profile', username=tweet.user.username) }}">@{{ tweet.user.username }}</a></small>
                                     </div>
                                     <div class="col-lg-2 text-right">
                                         {{ (current_time - tweet.date_created) |time_passed }}
@@ -28,8 +27,6 @@
                             </div>
                         </div>
 
-
-
                                 {% for reply in replies %}
                                 <div class="row">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -39,7 +36,7 @@
                                                         <div class="col-lg-10">
                                                             <img src="{{ reply.image }}" style="width: 30px; height: 30px;" class="img-circle">
                                                             <strong>{{ reply.name }}</strong>
-                                                            <small><em>@{{ reply.username }}</em></small>
+                                                            <small><a href="{{ url_for('users.profile', username=reply.username) }}">@{{ reply.username }}</a></small>
                                                         </div>
                                                         <div class="col-lg-2 text-right">
                                                             {{ (current_time - reply.date_created) |time_passed }}
@@ -67,8 +64,6 @@
             </div>
         </div>
 
-
-
 <div class="modal fade" id="newPost">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -77,7 +72,7 @@
                 <h4 class="modal-title">Post Reply</h4>
             </div>
 
-            <form action="{{ url_for('replies', tweet_id=tweet.id) }}" method="POST">
+            <form action="{{ url_for('tweets.replies', tweet_id=tweet.id) }}" method="POST">
                 <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
