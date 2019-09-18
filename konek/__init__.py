@@ -25,8 +25,9 @@ from konek.main.routes import main
 from konek.users.routes import users
 from konek.search.routes import search
 from konek.tweets.routes import tweets
-
+from konek.errors.handlers import errors
 app.register_blueprint(main)
 app.register_blueprint(users)
 app.register_blueprint(search)
 app.register_blueprint(tweets)
+app.register_blueprint(errors)
