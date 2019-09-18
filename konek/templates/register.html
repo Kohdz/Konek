@@ -11,12 +11,13 @@
 <div class="container-fluid">
     <div class="row pad">
         <div class="col-lg-12 col-lg-offset-0 pad">
-            <h2 class="text-center bold">Get Konked</h2>
+            <h2 class="text-center bold">Sign Up</h2>
 
             <br/>
 
             <form action="{{ url_for('users.register') }}" method="POST">
             {{ form.csrf_token }}
+
 
             <div class="form-group">
                 {{ form.name.label(class="form-control-label") }}
@@ -93,10 +94,13 @@
                 {% endif %}
             </div>
 
+            {{ form.recaptcha }}
+            <br>
+
             <div class="form-group">
                 <button type="submit" class="btn btn-danger btn-block">Sign up</button>
-                <!-- {{ form.recaptcha }} -->
             </div>
+
             <div class="border-top pt-3">
                 <small class="text-muted">
                     Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Log In</a>

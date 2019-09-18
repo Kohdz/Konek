@@ -5,7 +5,6 @@
 - unfollow button
 - comment/like
 - fix bug for search bar
-- implement recaptcha on sign up page
 - error pages
 
 
@@ -13,12 +12,8 @@
 #CHANGES I MADE#
 ################
 
-- set up postgresql database on server
-- fixed timeline template
-- fixed reply bug
-- implemented reply redirect to profile page
-- fixed follow profile bug
-- formatted python files with yapf
+- implement recaptcha on sign up page [x]
+
 
 
 #################
@@ -45,3 +40,9 @@
     i. fixed form.text.data bug [x]
     ii. queried all of the tables at once [x]
 - implemented blueprints
+- set up postgresql database on server [x]
+- fixed timeline template [x]
+- fixed reply bug [x]
+- implemented reply redirect to profile page [x]
+- fixed follow profile bug [x]
+- formatted python code with yapf [x]
