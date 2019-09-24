@@ -16,7 +16,7 @@ body {
 }
 
 #panel-body-registration{
-    height: 66rem;
+    height: 69rem;
 }
 
 .panel {
@@ -38,8 +38,38 @@ body {
 svg{
     width: 85vw;
     margin-top: 2rem;
-    margin-left: 4rem
+    margin-left: 4rem;
 }
+
+.error-container {
+    margin-top: 14rem;
+}
+
+
+#error404 {
+    display: flex;
+    margin: auto;
+    width: 35vw;
+}
+
+#error500 {
+    display: flex;
+    margin: auto;
+    width: 35vw;
+}
+
+#error403 {
+    display: flex;
+    margin: auto;
+    width: 35vw;
+
+}
+
+.panel-default-error{
+    min-width: 50rem;
+    max-width: 60rem;
+}
+
 
 /* svg:hover {
     color: blue;
@@ -56,6 +86,24 @@ svg{
     padding-right: 1rem;
 }
 
+
+.g-recaptcha div { 
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+
+@media only screen and (max-width: 360px) {
+    .g-recaptcha div { 
+        margin-left: 0px;
+        padding: 0px;
+
+    }
+}
+
+#alreadyUser {
+    margin-top: 0
+}
 
 
 .Fill-1:hover {
@@ -94,4 +142,56 @@ svg{
 }
 .Fill-11:hover {
     fill: rgba(255, 51, 255, .7);
+}
+
+
+@media only screen and (max-width: 360px) {
+
+    .Fill-1 {
+        fill: rgba(51,153,225, .7);
+        display: none;
+    }
+    
+    .Fill-2 {
+        fill: rgba(51,225,51, .7);
+        display: none;
+    }
+    
+    .Fill-3 {
+        fill: rgba(225,153,51, .7);
+        display: none;
+    }
+    
+    .Fill-4 {
+        fill: rgba(204,0,204, .7);
+        display: none;
+    }
+    
+    .Fill-5 {
+        fill: rgba(225,225,51, .7);
+        display: none;
+    }
+    .Fill-6 {
+        fill: rgba(255,153,51, .7);
+        display: none;
+    }
+    .Fill-7 {
+        fill: rgba(225,51,51, .7);
+        display: none;
+    }
+    .Fill-8 {
+        fill: rgba(51,225,51, .7);
+    }
+    .Fill-9 {
+        fill: rgba(225,225, 51, .7);
+        display: none;
+    }
+    .Fill-10 {
+        fill: rgba(153, 255, 153, .7);
+        display: none;
+    }
+    .Fill-11 {
+        fill: rgba(255, 51, 255, .7);
+        display: none;
+    }
 }

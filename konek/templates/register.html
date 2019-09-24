@@ -92,7 +92,7 @@
                 {% else %}
                     {{ form.confirm_password(class="form-control form-control-lg") }}
                 {% endif %}
-            </div>
+            </div class="captua">
 
             {{ form.recaptcha }}
             <br>
@@ -101,7 +101,7 @@
                 <button type="submit" class="btn btn-danger btn-block">Sign up</button>
             </div>
 
-            <div class="border-top pt-3">
+            <div class="border-top pt-3" id="alreadyUser">
                 <small class="text-muted">
                     Already Have An Account? <a class="ml-2" href="{{ url_for('users.login') }}">Log In</a>
                 </small>
