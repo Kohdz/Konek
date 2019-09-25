@@ -36,6 +36,7 @@ body {
 }
 
 svg{
+    position: absolute;
     width: 85vw;
     margin-top: 2rem;
     margin-left: 4rem;
@@ -105,6 +106,9 @@ svg{
     margin-top: 0
 }
 
+.Fill-0:hover {
+    fill: blue;
+}
 
 .Fill-1:hover {
     fill: rgba(51,153,225, .7);
@@ -144,9 +148,22 @@ svg{
     fill: rgba(255, 51, 255, .7);
 }
 
+.Fill-0{
+    display: none;
+    }
+
 
 @media only screen and (max-width: 360px) {
+    svg {
+        position: absolute;
+        background-size: 1rem 1rem;
+        margin-top: 0;
+        margin-left: 0;
+    }
 
+    .Fill-0 {
+        display: block;
+    }
     .Fill-1 {
         fill: rgba(51,153,225, .7);
         display: none;
@@ -181,6 +198,7 @@ svg{
     }
     .Fill-8 {
         fill: rgba(51,225,51, .7);
+        display: none;
     }
     .Fill-9 {
         fill: rgba(225,225, 51, .7);
