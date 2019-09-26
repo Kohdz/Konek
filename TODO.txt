@@ -46,3 +46,12 @@
 - implemented reply redirect to profile page [x]
 - fixed follow profile bug [x]
 - formatted python code with yapf [x]
+
+
+#################
+Creds
+################
+
+set SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://postgres:password@35.245.111.35:5432/postgres
+set RECAPTCHA_PUBLIC_KEY=6LeFAbkUAAAAAGL0lkQ1z-hSgkAEVK3vVVdiwRH9
+set RECAPTCHA_PRIVATE_KEY=6LeFAbkUAAAAADKHKt1gnV6tWMiWvXtninfR-ec7
