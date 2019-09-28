@@ -22,7 +22,6 @@ def register():
                         join_date=datetime.now())
         db.session.add(new_user)
         db.session.commit()
-        login_user(new_user)
         flash('User has been succesfully created! Please log in!', 'success')
         return redirect(url_for('users.login'))
     return render_template('register.html', form=form, title="Register")

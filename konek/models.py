@@ -1,9 +1,6 @@
 from flask_login import LoginManager, UserMixin
-# from konek import db
-from . import db
+from konek import db
 
-# wont be acessing this class directly, no no class needed
-# has relationship back to user
 followers = db.Table(
     'Followers', db.Column('follower_id', db.Integer,
                            db.ForeignKey('user.id')),

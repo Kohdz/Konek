@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <h3 class="text-center bold">My Profile</h3>
+            <h3 class="text-center bold">Profile</h3>
         </div>
         <div class="col-lg-4">
             <div class="panel panel-default">
@@ -100,15 +100,14 @@
                                             <div class="col-lg-10">
                                                 <div>
                                                     <strong class="mid">{{ follower.name }}</strong> 
-                                                    <small><em><a href="{{ url_for('users.profile', username=follower.username) }}"></a> {{ follower.username }}</em></small>
+                                                    <small><em>@<a href="{{ url_for('users.profile', username=follower.username) }}">{{ follower.username }}</a></em></small>
                                                 </div>
                                                 <div class="row pad">
-                                                    <hr />
                                                     <div class="col-lg-12">
                                                         <i class="glyphicon glyphicon-th-list"></i> {{ follower.followed_by.all()| length }}
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                     </div>
                                                 </div>
+                                                <hr />
                                             </div>
                                         </div>
                                     </div>
