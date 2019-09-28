@@ -3,17 +3,14 @@
 ################
 
 - unfollow button
+- following tab on profile page
 - comment/like
 - fix bug for search bar
-- error pages
 
 
 ################
 #CHANGES I MADE#
 ################
-
-- implement recaptcha on sign up page [x]
-
 
 
 #################

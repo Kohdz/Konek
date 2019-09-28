@@ -1,9 +1,7 @@
 import sqlite3
 
 
-# search utils
 def search_database(database, query):
-    # define full path with //
     connect = sqlite3.connect(
         '/home/joe/Projects/twitter-clone-v1/konek/twitterclone.db')
     cur = connect.cursor()

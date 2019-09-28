@@ -8,6 +8,7 @@ from konek.models import User, Tweet, followers
 from konek import db
 from datetime import datetime
 
+
 users = Blueprint('users', __name__)
 
 
@@ -49,7 +50,6 @@ def logout():
     return redirect(url_for('main.index'))
 
 
-# update user account info route
 @users.route('/account', methods=['GET', 'POST'])
 @login_required
 def update_account():
@@ -63,11 +63,9 @@ def update_account():
         db.session.commit()
         flash('Your account has been updated!', 'success')
         return redirect(url_for('users.update_account'))
-
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-
     image_file = url_for('static', filename='imgs/' + current_user.image)
     return render_template('update_account.html',
                            title='Update Account',
