@@ -7,6 +7,7 @@ from flask_login import LoginManager
 from flask_uploads import IMAGES
 from konek.config import Config
 
+
 app = Flask(__name__)
 app.config.from_object(Config)
 photos = UploadSet('photos', IMAGES)
@@ -15,9 +16,10 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'users.login'
 
 configure_uploads(app, photos)
-
 db = SQLAlchemy(app)
-Migrate = Migrate(app, db)
+
+MIGRATION_DIR = "./konek/migrations"
+Migrate = Migrate(app, db, directory=MIGRATION_DIR)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 

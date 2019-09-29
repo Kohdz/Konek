@@ -5,6 +5,7 @@ from konek.models import Tweet, Reply
 from konek import db
 from datetime import datetime
 
+
 tweets = Blueprint('tweets', __name__)
 
 
@@ -38,7 +39,6 @@ def view_tweet(tweet_id):
                            image_file=image_file)
 
 
-# reply form modal
 @tweets.route('/tweet/<int:tweet_id>/reply', methods=['POST'])
 @login_required
 def replies(tweet_id):

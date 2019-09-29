@@ -3,6 +3,7 @@ from konek.search.forms import SearchForm
 from konek.search.utils import search_database
 from konek import db
 
+
 search = Blueprint('search', __name__)
 
 

@@ -1,6 +1,7 @@
 from flask_login import LoginManager, UserMixin
 from konek import db
 
+
 followers = db.Table(
     'Followers', db.Column('follower_id', db.Integer,
                            db.ForeignKey('user.id')),

@@ -2,9 +2,9 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_user
 from werkzeug.security import generate_password_hash
 from konek.search.forms import SearchForm
+from konek import db, app, login_manager
 from konek.models import User
-from konek import db, login_manager, app
-from datetime import datetime
+
 
 main = Blueprint('main', __name__)
 
@@ -32,5 +32,4 @@ def time_passed(seconds_since):
 
 @main.route('/')
 def index():
-    form = SearchForm()
-    return render_template('index.html', title='Homepage', form=form)
+    return render_template('index.html', title='Homepage')

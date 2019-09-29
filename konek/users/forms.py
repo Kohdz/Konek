@@ -32,17 +32,14 @@ class RegisterForm(FlaskForm):
                                         EqualTo('password')])
     image = FileField(
         validators=[FileAllowed(IMAGES, 'Only Images Are Accepted')])
-
     recaptcha = RecaptchaField()
 
-    # method to check whether the user name is taken or not
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError(
                 'That username is taken. Please choose a different one.')
 
-    # method to check whether the email is taken or not
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
@@ -65,7 +62,6 @@ class UpdateAccountForm(FlaskForm):
                              Email()])
     submit = SubmitField('Update')
 
-    # method to check whether the user name is taken or not
     def validate_username(self, username):
         if username.data != current_user.username:
             user = User.query.filter_by(username=username.data).first()
@@ -73,7 +69,6 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError(
                     'That username is taken. Please choose a different one.')
 
-    # method to check whether the user name is taken or not
     def validate_email(self, email):
         if email.data != current_user.email:
             email = User.filter_by(email=email.data).first()
