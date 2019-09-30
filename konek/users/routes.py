@@ -87,6 +87,7 @@ def profile(username):
         Tweet.date_created.desc()).all()
     current_time = datetime.now()
     followed_by = user.followed_by.all()
+    followings = user.following.all()
     display_follow = True
     if current_user == user:
         display_follow = False
@@ -100,7 +101,8 @@ def profile(username):
                            current_time=current_time,
                            followed_by=followed_by,
                            image_file=image_file,
-                           display_follow=display_follow)
+                           display_follow=display_follow,
+                           followings=followings)
 
 
 @users.route('/timeline', defaults={'username': None})
