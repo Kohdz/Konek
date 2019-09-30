@@ -54,7 +54,10 @@
                                 <a href="#tweets" aria-controls="tweets" role="tab" data-toggle="tab">Tweets</a>
                             </li>
                             <li role="presentation">
-                                <a href="#followings" aria-controls="followings" role="tab" data-toggle="tab">Followers</a>
+                                <a href="#followers" aria-controls="followers" role="tab" data-toggle="tab">Followers</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#followings" aria-controls="followings" role="tab" data-toggle="tab">Following</a>
                             </li>
                         </ul>
                         
@@ -89,13 +92,13 @@
                                 <br><a href="{{ url_for('users.timeline', username=current_user.username) }}">More</a>
                                 
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="followings">
+                            <div role="tabpanel" class="tab-pane" id="followers">
                                 {% for follower in followed_by %}
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="row pad">
                                             <div class="col-lg-2">
-                                                <img src="{{ url_for('static', filename='./imgs/amon.png') }}" class="img-circle" style="width: 60px; height: 60px;" />
+                                                <img src="{{ url_for('static', filename='imgs/' + follower.image) }}" class="img-circle" style="width: 60px; height: 60px;" />
                                             </div>
                                             <div class="col-lg-10">
                                                 <div>
@@ -113,8 +116,34 @@
                                     </div>
                                 </div>
                                 {% endfor %}
-                                
                             </div>
+
+                            <div role="tabpanel" class="tab-pane" id="followings">
+                                {% for following in followings %}
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row pad">
+                                            <div class="col-lg-2">
+                                                <img src="{{ url_for('static', filename='imgs/' + following.image) }}" class="img-circle" style="width: 60px; height: 60px;" />
+                                            </div>
+                                            <div class="col-lg-10">
+                                                <div>
+                                                    <strong class="mid">{{ following.name }}</strong> 
+                                                    <small><em>@<a href="{{ url_for('users.profile', username=following.username) }}">{{ following.username }}</a></em></small>
+                                                </div>
+                                                <div class="row pad">
+                                                    <div class="col-lg-12">
+                                                        <i class="glyphicon glyphicon-th-list"></i> {{ following.following.all()| length }}
+                                                    </div>
+                                                </div>
+                                                <hr/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
                         </div>
                         
                         </div>
