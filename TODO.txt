@@ -3,7 +3,6 @@
 ################
 
 - unfollow button
-- following tab on profile page
 - comment/like
 - fix bug for search bar
 
@@ -11,6 +10,10 @@
 ################
 #CHANGES I MADE#
 ################
+
+- following tab on profile page
+- show proper user image of follower & user you are following
+
 
 
 #################

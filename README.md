@@ -8,20 +8,23 @@ Konek is a Flask web application that mimics the core functionalities of Twitter
 
 [Konek](http://konekted.herokuapp.com/)
 
-## Installation (Local)
+## Docker Installation (Local/Linux Commands)
 
 ### Konek supports Python 3
 
-1. Create a virtual environment and navigate inside it
+1. Install Docker `sudo apt install docker`
 
-2. `pip install requirements.txt`
-
-3. Set environment variables for the following:
+2. Within the Dockerfile, define the following:
+    1. `WORKDIR` (Path of Konek Repository)
     1. `SQLALCHEMY_DATABASE_URI`
-    2. `RECAPTCHA_PUBLIC_KEY`
+    2. `RECAPTCHA_PUBLIC_KEY` 
     3. `RECAPTCHA_PRIVATE_KEY`
 
-4. After environment variables have been set, run the Flask web application with `python run.py runserver`
+3. Build the Docker Image `sudo docker build -t <image name> <path of project>`
+
+4. After the Docker Image has been built, run the image. `sudo docker run -d -p 5000:5000 <image name>`
+
+5. To access Konek, navigate to either http://localhost:5000/ or http://127.0.0.1:5000/
 
 ## Preview
 
