@@ -146,3 +146,17 @@ def follow(username):
     current_user.following.append(user_to_follow)
     db.session.commit()
     return redirect(url_for('users.profile', username=user_to_follow.username))
+
+@users.route('/unfollow/<username>')
+@login_required
+def unfollow(username):
+
+    delstatement = "DELETE FROM `followers` WHERE id={user_to_unfollow}"
+
+
+    user_to_unfollow = User.query.filter_by(username=username).first()
+    current_user.following.append(user_to_unfollow)
+    db.session.commit()
+    return redirect(url_for('users.profile', username=user_to_follow_unfollow.username))
+
+
