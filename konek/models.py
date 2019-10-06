@@ -22,17 +22,17 @@ class User(UserMixin, db.Model):
                                 secondary=followers,
                                 primaryjoin=(followers.c.follower_id == id),
                                 secondaryjoin=(followers.c.following_id == id),
-                                backref=db.backref('followers',
+                                backref=db.backref('followed_by',
                                                    lazy='dynamic'),
                                 lazy='dynamic')
 
-    followed_by = db.relationship(
-        'User',
-        secondary=followers,
-        primaryjoin=(followers.c.following_id == id),
-        secondaryjoin=(followers.c.follower_id == id),
-        backref=db.backref('follower', lazy='dynamic'),
-        lazy='dynamic')
+    # followed_by = db.relationship(
+    #     'User',
+    #     secondary=followers,
+    #     primaryjoin=(followers.c.following_id == id),
+    #     secondaryjoin=(followers.c.follower_id == id),
+    #     backref=db.backref('follower', lazy='dynamic'),
+    #     lazy='dynamic')
 
     def __repr__(self):
         return f'username: {self.username} | name: {self.name} | email: {self.email}'

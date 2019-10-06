@@ -88,12 +88,19 @@ def profile(username):
     current_time = datetime.now()
     followed_by = user.followed_by.all()
     followings = user.following.all()
-    display_follow = True
+    # breakpoint()
     if current_user == user:
         display_follow = False
+        display_unfollow = False
+
+    elif user in current_user.following:
+        display_follow = False
+        display_unfollow = True 
     else:
-        if current_user in followed_by:
-            display_follow = False
+        display_follow = True
+        display_unfollow = False
+         
+    # if not current_user and not display_follow
     return render_template('profile.html',
                            title='Profile',
                            current_user=user,
@@ -102,6 +109,7 @@ def profile(username):
                            followed_by=followed_by,
                            image_file=image_file,
                            display_follow=display_follow,
+                           display_unfollow=display_unfollow,
                            followings=followings)
 
 
@@ -145,20 +153,20 @@ def timeline(username):
 @login_required
 def follow(username):
     user_to_follow = User.query.filter_by(username=username).first()
-    current_user.following.append(user_to_follow)
-    db.session.commit()
+    if user_to_follow not in current_user.following:
+        current_user.following.append(user_to_follow)
+        db.session.commit()
     return redirect(url_for('users.profile', username=user_to_follow.username))
 
 @users.route('/unfollow/<username>')
 @login_required
 def unfollow(username):
 
-    delstatement = "DELETE FROM `followers` WHERE id={user_to_unfollow}"
-
-
     user_to_unfollow = User.query.filter_by(username=username).first()
-    current_user.following.append(user_to_unfollow)
+    current_user.following.remove(user_to_unfollow)
+
+
     db.session.commit()
-    return redirect(url_for('users.profile', username=user_to_follow_unfollow.username))
+    return redirect(url_for('users.profile', username=user_to_unfollow.username))
 
 

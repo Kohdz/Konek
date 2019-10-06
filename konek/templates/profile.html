@@ -42,9 +42,9 @@
 
                     {% endif %}
 
-                    {% if not display_follow %}
+                    {% if display_unfollow %}
                     <li class="list-group-item">
-                        &nbsp; <strong class="pull-left"><a href=" {{ url_for('users.unfollow', username=current_user.username) }} ">UNFOLLOW</a></strong>
+                        &nbsp; <strong class="pull-right"><a href=" {{ url_for('users.unfollow', username=current_user.username) }} ">UNFOLLOW</a></strong>
                     </li>
 
                     {% endif %}
