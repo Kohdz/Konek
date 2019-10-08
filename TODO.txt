@@ -2,15 +2,16 @@
 ######TODO######
 ################
 
-- unfollow button
 - comment/like
 - fix bug for search bar
+- pretty up delete tweet modal
 
 
 ################
 #CHANGES I MADE#
 ################
 
+- delete tweet button 
 - following tab on profile page
 - show proper user image of follower & user you are following
 
