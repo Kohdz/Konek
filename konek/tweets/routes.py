@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, abort
 from flask_login import login_user, login_required, current_user
 from konek.tweets.forms import TweetForm, ReplyForm
 from konek.models import Tweet, Reply
@@ -37,6 +37,18 @@ def view_tweet(tweet_id):
                            form=form,
                            replies=replies,
                            image_file=image_file)
+
+
+@tweets.route('/tweet/<int:tweet_id>/delete', methods=['POST'])
+@login_required
+def delete_tweet(tweet_id):
+    tweet = Tweet.query.get_or_404(tweet_id)
+    if tweet.user_id != current_user.id:
+        abort(403)
+    tweet.text = 'This tweet has been deleted'
+    db.session.commit()
+    flash('Your tweet has been deleted!', 'success')
+    return redirect(url_for('tweets.view_tweet', tweet_id=tweet.id))
 
 
 @tweets.route('/tweet/<int:tweet_id>/reply', methods=['POST'])
