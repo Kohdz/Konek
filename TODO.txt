@@ -2,7 +2,7 @@
 ######TODO######
 ################
 
-- comment/like
+- comment/like counter
 - fix bug for search bar
 - pretty up delete tweet modal
 
@@ -11,10 +11,7 @@
 #CHANGES I MADE#
 ################
 
-- delete tweet button 
-- following tab on profile page
-- show proper user image of follower & user you are following
-
+- fixed timeline to show current_user's tweets and tweets of users that current_user is following
 
 
 #################
@@ -47,8 +44,6 @@
 - implemented reply redirect to profile page [x]
 - fixed follow profile bug [x]
 - formatted python code with yapf [x]
-
-
-#################
-Creds
-################
+- delete tweet button [x]
+- following tab on profile page [x]
+- show proper user image of follower & user you are following [x]

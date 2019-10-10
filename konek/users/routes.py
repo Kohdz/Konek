@@ -7,6 +7,7 @@ from konek.tweets.forms import TweetForm
 from konek.models import User, Tweet, followers
 from konek import db
 from datetime import datetime
+from sqlalchemy import or_
 
 
 users = Blueprint('users', __name__)
@@ -113,26 +114,19 @@ def profile(username):
                            followings=followings)
 
 
-@users.route('/timeline', defaults={'username': None})
-@users.route('/timeline/<username>')
-def timeline(username):
+@users.route('/timeline')
+def timeline():
     image_file = url_for('static', filename='imgs/' + current_user.image)
     form = TweetForm()
-    if username:
-        user = User.query.filter_by(username=username).first()
-        if not user:
-            abort(404)
-        tweets = Tweet.query.filter_by(user=user).order_by(
-            Tweet.date_created.desc()).all()
-        total_tweets = len(tweets)
-    else:
-        user = current_user
-        tweets = Tweet.query.join(
-            followers, (followers.c.following_id == Tweet.user_id)).filter(
-                followers.c.follower_id == current_user.id).order_by(
-                    Tweet.date_created.desc()).all()
-        total_tweets = Tweet.query.filter_by(user=user).order_by(
-            Tweet.date_created.desc()).count()
+    user = User.query.filter_by(username=current_user.username).first()
+    if not user:
+        abort(404)
+
+    follower_query = db.session.query(followers.c.following_id).filter(followers.c.follower_id==user.id)
+    tweets = db.session.query(Tweet).filter(or_(Tweet.user_id.in_(follower_query), Tweet.user_id==user.id)).order_by(Tweet.date_created.desc()).all()
+
+    user_tweets = Tweet.query.filter_by(user=user).order_by(Tweet.date_created.desc()).all()
+    total_tweets = len(user_tweets)
     current_time = datetime.now()
     followed_by_count = user.followed_by.count()
     who_to_watch = User.query.filter(User.id != user.id).order_by(
