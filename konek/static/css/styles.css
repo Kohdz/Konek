@@ -135,6 +135,54 @@ svg{
     margin-top: 6rem;
 }
 
+#tweets-Container {
+    min-width: 36rem;    
+}
+
+#del-Box {
+    margin-top: 13vw;
+    display: flex;
+    justify-content: center;
+}
+
+#del-Box-width {
+    width: 43rem;
+}
+
+#del-Box-Header{
+    display: flex;
+    justify-content: center;
+}
+
+#del-Box-Sub {
+    padding-left: 16rem;
+}
+
+#del-Box-close {
+    margin-right: 13rem;
+}
+
+#del-Box-options {
+    display: flex;
+    justify-content: center;
+}
+
+.likes-num{
+    float:right;
+    padding-right: 85px;
+}
+
+#del-button{
+    display: flex;
+    justify-content: center;
+    widows: 2rem;
+    float: right;
+    margin-top: -2rem;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 0.7)
+}
+
 .Fill-0:hover {
     fill: blue;
 }

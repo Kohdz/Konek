@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="container" id="tweetspannel">
-    <div class="col-lg-6">
+    <div class="col-lg-6" id="tweets-Container">
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row">
@@ -25,8 +25,8 @@
                                     </div>
                                 </div>
                                 {% if tweet.user_id == current_user.id %}
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">
-                                        <span class="glyphicon glyphicon-trash"></span>
+                                    <button type="button" id="del-button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">
+                                            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                     </button>
                                 {% endif %}
                             </div>
@@ -77,7 +77,7 @@
                 <h4 class="modal-title">Post Reply</h4>
             </div>
 
-            <form action="{{ url_for('tweets.replies', tweet_id=tweet.id) }}" method="POST">
+            <form action="{{ url_for('tweets.replies', tweet_id=tweet.id) }}" method="POST" id="del-Box-Sub">
                 <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
@@ -108,15 +108,15 @@
 
 <!-- Modal -->
 <div class="modal fade" id="deleteModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Delete Tweet</h4>
+    <div class="modal-dialog" id="del-Box">
+        <div class="modal-content" id="del-Box-width">
+            <div class="modal-header" id="del-Box-Header">
+                
+                <h4> Are You Sure You Want To Delete Tweet?</h4>
             </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">
+            <div class="modal-footer" id="del-Box-options">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="del-Box-close">
                     Close
                 </button>
     
