@@ -25,12 +25,13 @@
                                     </div>
                                 </div>
                                 {% if tweet.user_id == current_user.id %}
-                                    <button type="button" id="del-button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">
+                                    <button type="button" id="del-button" data-toggle="modal" data-target="#deleteModal">
                                             <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                     </button>
                                 {% endif %}
                             </div>
                         </div>
+                
 
                                 {% for reply in replies %}
                                 <div class="row">

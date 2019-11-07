@@ -130,7 +130,7 @@ def timeline():
     current_time = datetime.now()
     followed_by_count = user.followed_by.count()
     who_to_watch = User.query.filter(User.id != user.id).order_by(
-        db.func.random()).limit(4).all()
+        db.func.random()).limit(6).all()
     return render_template('timeline.html',
                            title="Timeline",
                            form=form,

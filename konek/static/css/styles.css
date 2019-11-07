@@ -1,292 +1,297 @@
 body {
-    font-family: 'Lato', sans-serif;}
+  font-family: "Lato", sans-serif;
+}
 
-#login-form{
-    min-width: 70%;
-   
-    margin:  auto;
-    margin-top: 6rem;
-    float: none;
+#login-form {
+  min-width: 70%;
+
+  margin: auto;
+  margin-top: 6rem;
+  float: none;
 }
 
 .panel-body {
-    margin-top: 2.5rem;
-    height: 40rem;
-    padding: 0
+  margin-top: 2.5rem;
+  height: 40rem;
+  padding: 0;
 }
 
-#panel-body-registration{
-    height: 69rem;
+#panel-body-registration {
+  height: 69rem;
 }
 
 .panel {
-    background: rgba(225,225,225,.4);
-    margin: auto;
+  background: rgba(225, 225, 225, 0.4);
+  margin: auto;
 }
 
-.panel-default{
-    max-width: 50rem;
+.panel-default {
+  max-width: 50rem;
 }
 
 #whoToFollow {
-
-    height: 5rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
+  height: 5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
-svg{
-    position: absolute;
-    width: 85vw;
-    margin-top: 2rem;
-    margin-left: 4rem;
+.tweet_view {
+  color: inherit;
+}
+
+#panel-main-main {
+  height: 60rem;
+}
+.laodMore {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+svg {
+  position: absolute;
+  width: 85vw;
+  margin-top: 2rem;
+  margin-left: 4rem;
 }
 
 .error-container {
-    margin-top: 14rem;
+  margin-top: 14rem;
 }
 
-
 #error404 {
-    display: flex;
-    margin: auto;
-    width: 35vw;
+  display: flex;
+  margin: auto;
+  width: 35vw;
 }
 
 #error500 {
-    display: flex;
-    margin: auto;
-    width: 35vw;
+  display: flex;
+  margin: auto;
+  width: 35vw;
 }
 
 #error403 {
-    display: flex;
-    margin: auto;
-    width: 35vw;
-
+  display: flex;
+  margin: auto;
+  width: 35vw;
 }
 
-.panel-default-error{
-    min-width: 50rem;
-    max-width: 60rem;
+.panel-default-error {
+  min-width: 50rem;
+  max-width: 60rem;
 }
-
 
 /* svg:hover {
     color: blue;
 } */
 
 .btn-block {
-    margin: auto;
-    width: 10rem;
+  margin: auto;
+  width: 10rem;
 }
 
 .border-top {
-    margin-top: 5.7rem;
-    float: right;
-    padding-right: 1rem;
+  margin-top: 5.7rem;
+  float: right;
+  padding-right: 1rem;
 }
 
-
-.g-recaptcha div { 
-    margin-left: auto; 
-    margin-right: auto;
+.g-recaptcha div {
+  margin-left: auto;
+  margin-right: auto;
 }
-
 
 @media only screen and (max-width: 360px) {
-    .g-recaptcha div { 
-        margin-left: 0px;
-        padding: 0px;
-
-    }
+  .g-recaptcha div {
+    margin-left: 0px;
+    padding: 0px;
+  }
 }
 
 #alreadyUser {
-    margin-top: 0
+  margin-top: 0;
 }
 
 .alert-success {
-    text-align: center;
-    font-size: 2.5rem;
-    margin: auto;
-    width: 50%;
-    background-color: rgba(63, 182, 24,.7)
-
+  text-align: center;
+  font-size: 2.5rem;
+  margin: auto;
+  width: 50%;
+  background-color: rgba(63, 182, 24, 0.7);
 }
 
-.alert-danger{
-    text-align: center;
-    font-size: 2.5rem;
-    margin: auto;
-    width: 53%;
-    background-color: rgba(225, 0, 57, .7)
+.alert-danger {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: auto;
+  width: 53%;
+  background-color: rgba(225, 0, 57, 0.7);
 }
 
 #watching {
-    height: 8rem;
-    margin-top: 0;
-    text-align: center
+  height: 8rem;
+  margin-top: 0;
+  text-align: center;
 }
 
 #tweetspannel {
-    display: flex;
-    justify-content: center;
-    margin-top: 6rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 6rem;
 }
 
 #tweets-Container {
-    min-width: 36rem;    
+  min-width: 36rem;
 }
 
 #del-Box {
-    margin-top: 13vw;
-    display: flex;
-    justify-content: center;
+  margin-top: 13vw;
+  display: flex;
+  justify-content: center;
 }
 
 #del-Box-width {
-    width: 43rem;
+  width: 43rem;
 }
 
-#del-Box-Header{
-    display: flex;
-    justify-content: center;
+#del-Box-Header {
+  display: flex;
+  justify-content: center;
 }
 
 #del-Box-Sub {
-    padding-left: 16rem;
+  padding-left: 16rem;
 }
 
 #del-Box-close {
-    margin-right: 13rem;
+  margin-right: 13rem;
 }
 
 #del-Box-options {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-.likes-num{
-    float:right;
-    padding-right: 85px;
+.likes-num {
+  float: right;
+  padding-right: 85px;
 }
 
-#del-button{
-    display: flex;
-    justify-content: center;
-    widows: 2rem;
-    float: right;
-    margin-top: -2rem;
-    color: black;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-color: rgba(255, 255, 255, 0.7)
+#del-button {
+  display: flex;
+  justify-content: center;
+  widows: 2rem;
+  float: right;
+  margin-top: -2rem;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .Fill-0:hover {
-    fill: blue;
+  fill: blue;
 }
 
 .Fill-1:hover {
-    fill: rgba(51,153,225, .7);
+  fill: rgba(51, 153, 225, 0.7);
 }
 
 .Fill-2:hover {
-    fill: rgba(51,225,51, .7);
+  fill: rgba(51, 225, 51, 0.7);
 }
 
 .Fill-3:hover {
-    fill: rgba(225,153,51, .7);
+  fill: rgba(225, 153, 51, 0.7);
 }
 
 .Fill-4:hover {
-    fill: rgba(204,0,204, .7);
+  fill: rgba(204, 0, 204, 0.7);
 }
 
 .Fill-5:hover {
-    fill: rgba(225,225,51, .7);
+  fill: rgba(225, 225, 51, 0.7);
 }
 .Fill-6:hover {
-    fill: rgba(255,153,51, .7);
+  fill: rgba(255, 153, 51, 0.7);
 }
 .Fill-7:hover {
-    fill: rgba(225,51,51, .7);
+  fill: rgba(225, 51, 51, 0.7);
 }
 .Fill-8:hover {
-    fill: rgba(51,225,51, .7);
+  fill: rgba(51, 225, 51, 0.7);
 }
 .Fill-9:hover {
-    fill: rgba(225,225, 51, .7);
+  fill: rgba(225, 225, 51, 0.7);
 }
 .Fill-10:hover {
-    fill: rgba(153, 255, 153, .7);
+  fill: rgba(153, 255, 153, 0.7);
 }
 .Fill-11:hover {
-    fill: rgba(255, 51, 255, .7);
+  fill: rgba(255, 51, 255, 0.7);
 }
 
-.Fill-0{
-    display: none;
-    }
-
+.Fill-0 {
+  display: none;
+}
 
 @media only screen and (max-width: 360px) {
-    svg {
-        position: absolute;
-        background-size: 1rem 1rem;
-        margin-top: 0;
-        margin-left: 0;
-    }
+  svg {
+    position: absolute;
+    background-size: 1rem 1rem;
+    margin-top: 0;
+    margin-left: 0;
+  }
 
-    .Fill-0 {
-        display: block;
-    }
-    .Fill-1 {
-        fill: rgba(51,153,225, .7);
-        display: none;
-    }
-    
-    .Fill-2 {
-        fill: rgba(51,225,51, .7);
-        display: none;
-    }
-    
-    .Fill-3 {
-        fill: rgba(225,153,51, .7);
-        display: none;
-    }
-    
-    .Fill-4 {
-        fill: rgba(204,0,204, .7);
-        display: none;
-    }
-    
-    .Fill-5 {
-        fill: rgba(225,225,51, .7);
-        display: none;
-    }
-    .Fill-6 {
-        fill: rgba(255,153,51, .7);
-        display: none;
-    }
-    .Fill-7 {
-        fill: rgba(225,51,51, .7);
-        display: none;
-    }
-    .Fill-8 {
-        fill: rgba(51,225,51, .7);
-        display: none;
-    }
-    .Fill-9 {
-        fill: rgba(225,225, 51, .7);
-        display: none;
-    }
-    .Fill-10 {
-        fill: rgba(153, 255, 153, .7);
-        display: none;
-    }
-    .Fill-11 {
-        fill: rgba(255, 51, 255, .7);
-        display: none;
-    }
+  .Fill-0 {
+    display: block;
+  }
+  .Fill-1 {
+    fill: rgba(51, 153, 225, 0.7);
+    display: none;
+  }
+
+  .Fill-2 {
+    fill: rgba(51, 225, 51, 0.7);
+    display: none;
+  }
+
+  .Fill-3 {
+    fill: rgba(225, 153, 51, 0.7);
+    display: none;
+  }
+
+  .Fill-4 {
+    fill: rgba(204, 0, 204, 0.7);
+    display: none;
+  }
+
+  .Fill-5 {
+    fill: rgba(225, 225, 51, 0.7);
+    display: none;
+  }
+  .Fill-6 {
+    fill: rgba(255, 153, 51, 0.7);
+    display: none;
+  }
+  .Fill-7 {
+    fill: rgba(225, 51, 51, 0.7);
+    display: none;
+  }
+  .Fill-8 {
+    fill: rgba(51, 225, 51, 0.7);
+    display: none;
+  }
+  .Fill-9 {
+    fill: rgba(225, 225, 51, 0.7);
+    display: none;
+  }
+  .Fill-10 {
+    fill: rgba(153, 255, 153, 0.7);
+    display: none;
+  }
+  .Fill-11 {
+    fill: rgba(255, 51, 255, 0.7);
+    display: none;
+  }
 }

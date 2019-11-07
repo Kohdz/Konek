@@ -69,3 +69,8 @@ def replies(tweet_id):
         flash('reply posted!', 'success')
         return redirect(url_for('tweets.view_tweet', tweet_id=tweet_id))
     flash('Something Went Wrong/Form Not Valid', 'danger')
+
+
+# write a new route that quries tweets that are not the last
+# 
+# 
