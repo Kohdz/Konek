@@ -160,3 +160,31 @@ def unfollow(username):
     current_user.following.remove(user_to_unfollow)
     db.session.commit()
     return redirect(url_for('users.profile', username=user_to_unfollow.username))
+
+
+@users.route('/tweet/<tweet_id>/like', methods=['POST'])
+@login_required
+def like(tweet_id):
+    tweet_to_like = Tweet.query.filter_by(id=tweet_id).first()
+    if tweet_to_like not in current_user.liked:
+        tweet_to_like.count += 1
+        current_user.liked.append(tweet_to_like)
+        db.session.commit()
+        return redirect(url_for('users.timeline'))
+
+    flash('Error: Cannot like the same tweet multiple times!', 'danger')
+    return redirect(url_for('tweets.view_tweet', tweet_id=tweet_id, count=tweet_to_like.count))
+
+
+@users.route('/tweet/<tweet_id>/unlike', methods=["POST"])
+@login_required
+def unlike(tweet_id):
+    tweet_to_unlike = Tweet.query.filter_by(id=tweet_id).first()
+    if tweet_to_unlike in current_user.liked:
+        tweet_to_unlike.count -= 1
+        current_user.liked.remove(tweet_to_unlike)
+        db.session.commit()
+        return redirect(url_for('users.timeline'))
+
+    flash('Error: Cannot unlike a tweet that you have not liked!', 'danger')
+    return redirect(url_for('tweets.view_tweet', tweet_id=tweet_id))
