@@ -1,97 +1,97 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <h3 class="text-center bold">Timeline</h3>
-        </div>
-
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="row pad">
-                        <div class="col-lg-12">
-                            <img src="{{ image_file }}" class="img-responsive img-circle center-block" alt="Image" />
-                        </div>
-                    </div>
-                    <div class="row pad">
-                        <div class="col-lg-4 col-lg-offset-2 text-center">
-                            <strong>
-                                Tweets <br />
-                                {{ total_tweets }}
-                            </strong> 
-                        </div>
-                        <div class="col-lg-4 text-center">
-                            <strong>
-                                Followers <br />
-                                {{ followed_by_count }} 
-                            </strong>
-                        </div>
-                    </div>
-                </div>
-                <ul class="list-group">
-                    <a class="list-group-item" data-toggle="modal" href="#newPost" data-backdrop="static" data-keboard="false">
-                        <i class="glyphicon glyphicon-plus-sign"></i> Post New Message
-                    </a>
-                </ul>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="text-center bold">Timeline</h3>
             </div>
-        </div>
+    
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row pad">
+                            <div class="col-lg-12">
+                                <img src="{{ image_file }}" class="img-responsive img-circle center-block" alt="Image" />
+                            </div>
+                        </div>
+                        <div class="row pad">
+                            <div class="col-lg-4 col-lg-offset-2 text-center">
+                                <strong>
+                                    Tweets <br />
+                                    {{ total_tweets }}
+                                </strong> 
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <strong>
+                                    Followers <br />
+                                    {{ followed_by_count }} 
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-group">
+                        <a class="list-group-item" data-toggle="modal" href="#newPost" data-backdrop="static" data-keboard="false">
+                            <i class="glyphicon glyphicon-plus-sign"></i> Post New Message
+                        </a>
+                    </ul>
+                </div>
+            </div>
+    
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-body" id="panel-main-main">
+                        {% for tweet in tweets %}
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="row">
+                                                <div class="col-lg-10">
+                                                    
+                                                    <img src="{{ url_for('static', filename='imgs/' + tweet.user.image) }}" style=" width: 30px; height: 30px;" class="img-circle">
+                                                    <strong> {{ tweet.user.name }}</strong> 
+                                                    <small><em>@ {{ tweet.user.username }}</em></small>
+                                                </div>
+                                                <div class="col-lg-2 text-right">
+                                                    {{ (current_time - tweet.date_created) |time_passed }}
+                                                </div>
+                                            </div>
+                                            <div class="row pad">
+                                                <div class="col-lg-12">
+                                                    <a class="tweet_view" href="{{ url_for('tweets.view_tweet', tweet_id=tweet.id) }}">
+                                                    {{ tweet.text }}
+                                                    </a>
 
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-body" id="panel-main-main">
-                    {% for tweet in tweets %}
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <div class="thumbnail">
-                                    <div class="caption">
-                                        <div class="row">
-                                            <div class="col-lg-10">
-                                                
-                                                <img src="{{ url_for('static', filename='imgs/' + tweet.user.image) }}" style=" width: 30px; height: 30px;" class="img-circle">
-                                                <strong> {{ tweet.user.name }}</strong> 
-                                                <small><em>@ {{ tweet.user.username }}</em></small>
-                                            </div>
-                                            <div class="col-lg-2 text-right">
-                                                {{ (current_time - tweet.date_created) |time_passed }}
-                                            </div>
-                                        </div>
-                                        <div class="row pad">
-                                            <div class="col-lg-12">
-                                                <a class="tweet_view" href="{{ url_for('tweets.view_tweet', tweet_id=tweet.id) }}">
-                                                {{ tweet.text }}
-                                                </a>
-                                            </div>
-                                        </div> 
+                                                    {% if tweet in current_user.liked %}
+                                                        <form action="{{ url_for('users.unlike', tweet_id=tweet.id) }}" method="post">
+                                                            <button class="heart" type="submit">
+                                                                <input id="toggle-heart" type="checkbox" checked="checked"/>
+                                                                {{ tweet.count }}
+                                                                <label for="toggle-heart">❤</label> 
+                                                            </button>
+                                                        </form>
+                                                    {% else %}
+                                                        <form action="{{ url_for('users.like', tweet_id=tweet.id) }}" method="post">
+                                                            <button class="heart" type="submit">
+                                                                <input id="toggle-heart" type="checkbox"/> 
+                                                                {{ tweet.count }}
+                                                                <label for="toggle-heart">❤</label>
+                                                            </button>
+                                                        </form>
+                                                    {% endif %}
+                                                 </div>
 
-                                            {% if tweet in current_user.liked %}
-                                                <form action="{{ url_for('users.unlike', tweet_id=tweet.id) }}" method="post">
-                                                    <button class="heart" type="submit">
-                                                        <input id="toggle-heart" type="checkbox" checked="checked"/>
-                                                        {{ tweet.count }}
-                                                        <label for="toggle-heart">❤</label> 
-                                                    </button>
-                                                </form>
-                                            {% else %}
-                                                <form action="{{ url_for('users.like', tweet_id=tweet.id) }}" method="post">
-                                                    <button class="heart" type="submit">
-                                                        <input id="toggle-heart" type="checkbox"/>
-                                                        {{ tweet.count }}
-                                                        <label for="toggle-heart">❤</label>
-                                                    </button>
-                                                </form>
-                                            {% endif %}
-                                            
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="laodMore">Older</div>
                 </div>
-                <div class="laodMore">Older</div>
             </div>
-        </div>
 
         <div class="col-lg-3">
             <div class="panel panel-default">
