@@ -2,16 +2,15 @@
 ######TODO######
 ################
 
-- comment/like counter
+- create a liked tweets tab on profile page to display current_users liked tweets
 - fix bug for search bar
-- pretty up delete tweet modal
 
 
 ################
 #CHANGES I MADE#
 ################
 
-- fixed timeline to show current_user's tweets and tweets of users that current_user is following
+- like/unlike button frontend/backend implemented
 
 
 #################
@@ -47,3 +46,4 @@
 - delete tweet button [x]
 - following tab on profile page [x]
 - show proper user image of follower & user you are following [x]
+- fixed timeline to show current_user's tweets and tweets of users that current_user is following [x]

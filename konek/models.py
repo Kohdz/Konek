@@ -7,11 +7,10 @@ followers = db.Table(
                            db.ForeignKey('user.id')),
     db.Column('following_id', db.Integer, db.ForeignKey('user.id')))
 
-likers = db.Table('Likers',
-    db.Column('liker_id',  db.Integer, db.ForeignKey('user.id')),
-    db.Column('liked_id', db.Integer, db.ForeignKey('user.id'))
+likes = db.Table('Likes',
+    db.Column('user_id',  db.Integer, db.ForeignKey('user.id')),
+    db.Column('tweet_id', db.Integer, db.ForeignKey('tweet.id'))
     )
-
 
 
 class User(UserMixin, db.Model):
@@ -32,24 +31,10 @@ class User(UserMixin, db.Model):
                                                    lazy='dynamic'),
                                 lazy='dynamic')
 
-    # followed_by = db.relationship(
-    #     'User',
-    #     secondary=followers,
-    #     primaryjoin=(followers.c.following_id == id),
-    #     secondaryjoin=(followers.c.follower_id == id),
-    #     backref=db.backref('follower', lazy='dynamic'),
-    #     lazy='dynamic')
-
-    liked = db.relationship('User', secondary=likers,
-        primaryjoin=(likers.c.liker_id == id),
-        secondaryjoin=(likers.c.liked_id == id),
-        backref=db.backref('likers', lazy='dynamic'), lazy='dynamic')
-
-    liked_by = db.relationship('User', secondary=likers,
-        primaryjoin=(likers.c.liked_id == id), 
-        secondaryjoin=(likers.c.liker_id == id),
-        backref=db.backref('liker', lazy='dynamic'), lazy='dynamic')
-
+    liked = db.relationship('Tweet', 
+                            secondary=likes,
+                            backref=db.backref('liked_by', lazy='dynamic'),
+                            lazy='dynamic')
 
     def __repr__(self):
         return f'username: {self.username} | name: {self.name} | email: {self.email}'
@@ -60,6 +45,7 @@ class Tweet(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     text = db.Column(db.String(140))
     date_created = db.Column(db.DateTime)
+    count = db.Column(db.Integer, default=0, nullable=False)
 
     def __repr__(self):
         return f'tweet id: {self.id} | user id: {self.user_id} | tweet: {self.text}'
