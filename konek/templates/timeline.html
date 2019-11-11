@@ -47,10 +47,9 @@
                                         <div class="caption">
                                             <div class="row">
                                                 <div class="col-lg-10">
-                                                    
                                                     <img src="{{ url_for('static', filename='imgs/' + tweet.user.image) }}" style=" width: 30px; height: 30px;" class="img-circle">
-                                                    <strong> {{ tweet.user.name }}</strong> 
-                                                    <small><em>@ {{ tweet.user.username }}</em></small>
+                                                    <strong>{{ tweet.user.name }}</strong> 
+                                                    <small><em>@<a href="{{ url_for('users.profile', username=tweet.user.username) }}">{{ tweet.user.username }}</a></em></small>
                                                 </div>
                                                 <div class="col-lg-2 text-right">
                                                     {{ (current_time - tweet.date_created) |time_passed }}

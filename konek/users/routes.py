@@ -89,6 +89,8 @@ def profile(username):
     current_time = datetime.now()
     followed_by = user.followed_by.all()
     followings = user.following.all()
+    likes = user.liked.all()
+
     # breakpoint()
     if current_user == user:
         display_follow = False
@@ -111,7 +113,8 @@ def profile(username):
                            image_file=image_file,
                            display_follow=display_follow,
                            display_unfollow=display_unfollow,
-                           followings=followings)
+                           followings=followings,
+                           likes=likes)
 
 
 @users.route('/timeline')
