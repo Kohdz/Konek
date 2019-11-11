@@ -69,6 +69,9 @@
                             <li role="presentation">
                                 <a href="#followings" aria-controls="followings" role="tab" data-toggle="tab">Following</a>
                             </li>
+                            <li role="presentation">
+                                <a href="#likes" aria-controls="likes" role="tab" data-toggle="tab">Likes</a>
+                            </li>
                         </ul>
                         
                         <!-- Tab panes -->
@@ -87,7 +90,7 @@
                                             </div>
                                             <div class="col-lg-10">
                                                 <div>
-                                                    <strong class="mid"> {{ tweet.user.name }}</strong> 
+                                                    <strong>{{ tweet.user.name }}</strong> 
                                                     <small><em>@<a href="{{ url_for('users.profile', username=tweet.user.username) }}">{{ tweet.user.username }}</a></em></small> . 
                                                     {{ (current_time - tweet.date_created) |time_passed }}
                                                 </div>
@@ -98,6 +101,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr/>
                                 {% endfor %}
                                 <br><a href="{{ url_for('users.timeline', username=current_user.username) }}">More</a>
                                 
@@ -120,7 +124,7 @@
                                                         <i class="glyphicon glyphicon-th-list"></i> {{ follower.followed_by.all()| length }}
                                                     </div>
                                                 </div>
-                                                <hr />
+                                                <hr/>
                                             </div>
                                         </div>
                                     </div>
@@ -149,6 +153,28 @@
                                                 <hr/>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+
+                            <div role="tabpanel" class="tab-pane" id="likes">
+                                {% for tweet in likes %}
+                                <div class="row pad">
+                                    <div class="col-lg-2">
+                                        <img src="{{ image_file }}" class="img-circle" style="width: 60px; height: 60px;" />
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div>
+                                            <strong>{{ tweet.user.name }}</strong> 
+                                            <small><em>@<a href="{{ url_for('users.profile', username=tweet.user.username) }}">{{ tweet.user.username }}</a></em></small> .
+                                            {{ (current_time - tweet.date_created) |time_passed }}
+                                        </div>
+                                        <div class="pad">
+                                            <a href="{{ url_for('tweets.view_tweet', tweet_id=tweet.id) }}">{{ tweet.text }}</a>
+                                        </div>
+                                        <hr/>
                                     </div>
                                 </div>
                                 {% endfor %}

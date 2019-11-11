@@ -2,7 +2,7 @@
 ######TODO######
 ################
 
-- create a liked tweets tab on profile page to display current_users liked tweets
+- fix profile UI
 - fix bug for search bar
 
 
@@ -11,6 +11,8 @@
 ################
 
 - like/unlike button frontend/backend implemented
+- create a liked tweets tab on profile page to display current_users liked tweets
+- timeline username @'s redirect to user profile pages
 
 
 #################
